@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.ConsultaPrincipalController">
+    <children>
+        <VBox spacing="10.0">
+            <HBox spacing="10.0">
+                <TextField fx:id="searchField" promptText="Buscar..." />
+                <Button fx:id="searchButton" text="Buscar" onAction="#handleSearch" />
+                <Region minWidth="50" />
+                <Button fx:id="detailsButton" text="Ver Detalles" onAction="#handleViewDetails" />
+                <Region minWidth="50" />
+                <Button fx:id="registerButton" text="Registrar Nuevo Paciente" onAction="#handleRegister" />
+            </HBox>
+            <TableView fx:id="tableViewPacientes" prefWidth="600" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="columnOrden" text="Nro" prefWidth="50"/>
+                    <TableColumn fx:id="columnNombre" text="Nombre" prefWidth="170"/>
+                    <TableColumn fx:id="columnApellido" text="Apellido" prefWidth="180"/>
+                    <TableColumn fx:id="columnDni" text="Dni" prefWidth="100"/>
+                    <TableColumn fx:id="columnEstado" text="Estado" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.DetallePacienteController" prefHeight="200.0" prefWidth="300.0">
+    <children>
+        <StackPane>
+            <VBox spacing="10.0" style="-fx-padding: 20;" alignment="CENTER">
+                <TextField fx:id="nombreField" promptText="Nombre" prefWidth="300.0" editable="false"/>
+                <TextField fx:id="apellidoField" promptText="Apellido" prefWidth="300.0" editable="false"/>
+                <TextField fx:id="dniField" promptText="DNI" prefWidth="300.0" editable="false"/>
+                <TextField fx:id="estadoField" promptText="Estado" prefWidth="300.0" editable="false"/>
+                
+                <HBox spacing="10.0">
+                    <Region minWidth="115" />
+                    <Button text="Cerrar" onAction="#handleClose" />
+                </HBox>
+            </VBox>
+        </StackPane>
+    </children>
+</AnchorPane>
