@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import java.util.ArrayList;
@@ -12,23 +8,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import DTO.PacienteDto;
 
-
-/**
- *
- * @author facundito
- */
 public class PacienteDao implements Dao<PacienteDto> {
     
     private ConexionSql conexion;
+    private List<PacienteDto> pacientes;  // Definir la lista de pacientes
 
     @Override
     public PacienteDto buscar(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<PacienteDto> listarPorCriterio(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -69,25 +61,39 @@ public class PacienteDao implements Dao<PacienteDto> {
                 sentencia.close();
                 this.conexion.cerrar();
             } catch (Exception ex) {
-
+                // Manejo de excepciones
             }
         }
+        pacientes = lista; // Asignar la lista de pacientes a la variable de instancia
         return lista;
     }
 
     @Override
     public boolean insertar(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean modificar(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean borrar(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public PacienteDto obtenerPorOrden(int orden) {
+        if (pacientes == null) {
+            // Si la lista es nula, cargar los pacientes
+            listarTodos();
+        }
+        for (PacienteDto paciente : pacientes) {
+            if (paciente.getId() == orden) {
+                return paciente;
+            }
+        }
+        return null;
+    }
 }

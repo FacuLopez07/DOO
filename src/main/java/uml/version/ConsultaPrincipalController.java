@@ -16,6 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import java.util.List;
+
+import DTO.PacienteDto;
+import DAO.Dao;
+import DAO.DaoFactory;
 
 public class ConsultaPrincipalController implements Initializable {
 
@@ -54,13 +59,21 @@ public class ConsultaPrincipalController implements Initializable {
     }
 
     private void cargarPacientes() {
-        // Aquí deberías agregar lógica para cargar la lista de pacientes.
-        tableViewPacientes.getItems().addAll(
-            new Paciente(1,"Juan", "Pérez", "1111111", "Pendiente"),
-            new Paciente(2,"Maria", "Gonzalez", "2222222", "Finalizado")
-            // Agrega más pacientes según sea necesario
-        );
+        // Usar el Factory para obtener el DAO
+        Dao<PacienteDto> pacienteDao = DaoFactory.getDao(PacienteDto.class);
+
+        // Llamar al método de listado desde el DAO
+        List<PacienteDto> pacientes = pacienteDao.listarTodos();
+
+        // Convertir Dto a modelo (si es necesario) y cargar en la tabla
+        tableViewPacientes.getItems().clear();
+        for (PacienteDto dto : pacientes) {
+            tableViewPacientes.getItems().add(
+                new Paciente(dto.getId(), dto.getNombre(), dto.getApellido(), dto.getDni(), "Estado")
+            );
+        }
     }
+
     
     @FXML
     private void handleSearch() {
@@ -97,28 +110,52 @@ public class ConsultaPrincipalController implements Initializable {
     
     @FXML
     private void handleViewDetails() {
+        // Obtener el paciente seleccionado en la tabla
         Paciente selectedPaciente = tableViewPacientes.getSelectionModel().getSelectedItem();
         if (selectedPaciente != null) {
             try {
+                // Usar el Factory para obtener el DAO
+                Dao<PacienteDto> pacienteDao = DaoFactory.getDao(PacienteDto.class);
+
+                // Obtener los detalles del paciente desde el DAO
+                PacienteDto pacienteDto = pacienteDao.obtenerPorOrden(selectedPaciente.getOrden());
+
+                // Convertir el DTO en un modelo Paciente
+                Paciente paciente = new Paciente(
+                    pacienteDto.getId(),
+                    pacienteDto.getNombre(),
+                    pacienteDto.getApellido(),
+                    pacienteDto.getDni(),
+                    pacienteDto.getEstado() 
+                );
+
                 // Cargar la vista de DetallePaciente
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetallePaciente.fxml"));
                 Parent root = loader.load();
 
-                // Obtener el controlador y cargar los datos del paciente
+                // Obtener el controlador de la vista de detalle
                 DetallePacienteController detalleController = loader.getController();
-                detalleController.cargarDatosPaciente(selectedPaciente);
+                detalleController.cargarDatosPaciente(paciente); // Pasar el modelo al controlador
 
                 // Crear y mostrar la nueva ventana
                 Stage stage = new Stage();
                 stage.setTitle("Detalles del Paciente");
                 stage.setScene(new Scene(root));
                 stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                // Manejo de errores si no se puede obtener el paciente
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al cargar los detalles");
+                alert.setContentText("Ocurrió un error al intentar cargar los detalles del paciente: " + e.getMessage());
+                alert.showAndWait();
             }
         } else {
             // Mostrar alerta si no se ha seleccionado un paciente
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.setContentText("Por favor, seleccione un paciente para ver los detalles.");

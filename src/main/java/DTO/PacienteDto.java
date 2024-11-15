@@ -14,6 +14,7 @@ public class PacienteDto {
     private String nombre;
     private String apellido;
     private String dni;
+    private String estado;
     
     // Constructor completo
     public PacienteDto(int id, String nombre, String apellido, String dni) {
@@ -39,6 +40,10 @@ public class PacienteDto {
     public String getDni() {
         return dni;
     }
+    
+    public String getEstado() {
+        return estado;
+    }
 
     // Setters
     public void setId(int id) {
@@ -54,6 +59,10 @@ public class PacienteDto {
     }
 
     public void setDni(String dni) {
+        this.dni = dni;
+    }
+    
+    public void setEstado(String estado) {
         this.dni = dni;
     }
 }

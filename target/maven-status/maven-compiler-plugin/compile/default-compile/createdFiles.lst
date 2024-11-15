@@ -1,7 +1,13 @@
 uml/version/ConsultaPrincipalController.class
-uml/version/DetallePacienteController.class
-module-info.class
+DAO/ConexionSql.class
 uml/version/Paciente.class
 uml/version/RegistroPacienteController.class
 uml/version/App.class
 uml/version/PrimaryController.class
+uml/version/DetallePacienteController.class
+DAO/Dao.class
+DAO/PacienteDao.class
+module-info.class
+DAO/PacienteDaoFactory.class
+DAO/DaoFactory.class
+DTO/PacienteDto.class

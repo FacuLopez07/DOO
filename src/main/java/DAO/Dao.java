@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author facundo
+ * @author facundito
  * @param <T>
  */
 public interface Dao<T> { 
@@ -24,5 +24,7 @@ public interface Dao<T> {
     boolean modificar(T dto);
 
     boolean borrar(T dto);
+    
+    T obtenerPorOrden(int orden);
 
 }
