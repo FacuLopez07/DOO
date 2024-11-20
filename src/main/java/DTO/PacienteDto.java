@@ -63,6 +63,6 @@ public class PacienteDto {
     }
     
     public void setEstado(String estado) {
-        this.dni = dni;
+        this.estado = estado;
     }
 }
