@@ -7,10 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import DAO.DaoFactory; 
-import DAO.PacienteDaoFactory;
 import DAO.Dao;
-import DTO.PacienteDto;
+import DAO.DaoFactory; 
+import DAO.OrdenDaoFactory;
+import DTO.OrdenDto;
 
 /**
  * JavaFX App
@@ -18,14 +18,14 @@ import DTO.PacienteDto;
 public class App extends Application {
 
     private static Scene scene;
-    private static Dao<PacienteDto> pacienteDao;
+    private static Dao<OrdenDto> ordenDao;
 
     @Override
     public void start(Stage stage) throws IOException {
         
         // Inicializa la fábrica de Daos
-        DaoFactory factory = new PacienteDaoFactory();
-        pacienteDao = factory.createDao(); // Creamos el Dao usando el patrón Factory
+        DaoFactory factory = new OrdenDaoFactory();
+        ordenDao = factory.createDao(); // Creamos el Dao usando el patrón Factory
         
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);

@@ -4,17 +4,17 @@
  */
 package DAO;
 
-import DTO.PacienteDto;
+import DTO.OrdenDto;
 
 /**
  *
  * @author facundito
  */
-public class PacienteDaoFactory extends DaoFactory {
-    
+public class OrdenDaoFactory extends DaoFactory {
     @Override
-    public Dao<PacienteDto> createDao() {
+    public Dao<OrdenDto> createDao() {
         // Crea y retorna un nuevo PacienteDao
-        return new PacienteDao();
+        return new OrdenDao();
     }
 }
+

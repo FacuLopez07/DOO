@@ -1,11 +1,18 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package uml.version;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class DetallePacienteController {
-
+/**
+ *
+ * @author facundito
+ */
+public class DetalleOrdenController {
     @FXML
     private TextField nombreField;
     @FXML

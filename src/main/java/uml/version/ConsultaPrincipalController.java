@@ -18,9 +18,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.util.List;
 
-import DTO.PacienteDto;
+import DTO.OrdenDto;
 import DAO.Dao;
 import DAO.DaoFactory;
+import uml.version.Paciente;
 
 public class ConsultaPrincipalController implements Initializable {
 
@@ -33,17 +34,17 @@ public class ConsultaPrincipalController implements Initializable {
     @FXML
     private Button registerButton;
     @FXML
-    private TableView<Paciente> tableViewPacientes;
+    private TableView<Orden> tableViewPacientes;
     @FXML
-    private TableColumn<Paciente, Integer> columnOrden;
+    private TableColumn<Orden, Integer> columnOrden;
     @FXML
-    private TableColumn<Paciente, String> columnNombre;
+    private TableColumn<Orden, String> columnNombre;
     @FXML
-    private TableColumn<Paciente, String> columnApellido;
+    private TableColumn<Orden, String> columnApellido;
     @FXML
-    private TableColumn<Paciente, String> columnDni;
+    private TableColumn<Orden, String> columnDni;
     @FXML
-    private TableColumn<Paciente, String> columnEstado;
+    private TableColumn<Orden, String> columnEstado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,16 +61,24 @@ public class ConsultaPrincipalController implements Initializable {
 
     private void cargarPacientes() {
         // Usar el Factory para obtener el DAO
-        Dao<PacienteDto> pacienteDao = DaoFactory.getDao(PacienteDto.class);
+        Dao<OrdenDto> ordenDao = DaoFactory.getDao(OrdenDto.class);
 
         // Llamar al método de listado desde el DAO
-        List<PacienteDto> pacientes = pacienteDao.listarTodos();
+        List<OrdenDto> ordenes = ordenDao.listarTodos();
 
         // Convertir Dto a modelo (si es necesario) y cargar en la tabla
         tableViewPacientes.getItems().clear();
-        for (PacienteDto dto : pacientes) {
+        for (OrdenDto dto : ordenes) {
             tableViewPacientes.getItems().add(
-                new Paciente(dto.getId(), dto.getNombre(), dto.getApellido(), dto.getDni(), "Estado")
+                new Orden(
+                            dto.getNroOrden(),          // nro_orden
+                            dto.getServicio(),          // servicio
+                            dto.getTurno(),             // turno
+                            dto.getDiagnostico(),       // diagnostico
+                            dto.getFechaConsulta(),     // fecha_consulta
+                            dto.getEstado(),            // estado
+                            dto.getPaciente()           // paciente
+                        )
             );
         }
     }
@@ -111,22 +120,24 @@ public class ConsultaPrincipalController implements Initializable {
     @FXML
     private void handleViewDetails() {
         // Obtener el paciente seleccionado en la tabla
-        Paciente selectedPaciente = tableViewPacientes.getSelectionModel().getSelectedItem();
+        Orden selectedPaciente = tableViewPacientes.getSelectionModel().getSelectedItem();
         if (selectedPaciente != null) {
             try {
                 // Usar el Factory para obtener el DAO
-                Dao<PacienteDto> pacienteDao = DaoFactory.getDao(PacienteDto.class);
+                Dao<OrdenDto> ordenDao = DaoFactory.getDao(OrdenDto.class);
 
                 // Obtener los detalles del paciente desde el DAO
-                PacienteDto pacienteDto = pacienteDao.obtenerPorOrden(selectedPaciente.getOrden());
+                OrdenDto ordenDto = ordenDao.obtenerPorOrden(selectedPaciente.getNroOrden());
 
                 // Convertir el DTO en un modelo Paciente
-                Paciente paciente = new Paciente(
-                    pacienteDto.getId(),
-                    pacienteDto.getNombre(),
-                    pacienteDto.getApellido(),
-                    pacienteDto.getDni(),
-                    pacienteDto.getEstado() 
+                Orden orden = new Orden(
+                    ordenDto.getNroOrden(),
+                    ordenDto.getServicio(),
+                    ordenDto.getTurno(),
+                    ordenDto.getDiagnostico(),
+                    ordenDto.getFechaConsulta(),
+                    ordenDto.getEstado(),
+                    ordenDto.getPaciente()
                 );
 
                 // Cargar la vista de DetallePaciente
@@ -135,7 +146,7 @@ public class ConsultaPrincipalController implements Initializable {
 
                 // Obtener el controlador de la vista de detalle
                 DetallePacienteController detalleController = loader.getController();
-                detalleController.cargarDatosPaciente(paciente); // Pasar el modelo al controlador
+                detalleController.cargarDatosPaciente(orden); // Pasar el modelo al controlador
 
                 // Crear y mostrar la nueva ventana
                 Stage stage = new Stage();

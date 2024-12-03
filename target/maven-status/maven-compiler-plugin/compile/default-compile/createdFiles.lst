@@ -9,5 +9,9 @@ DAO/Dao.class
 DAO/PacienteDao.class
 module-info.class
 DAO/PacienteDaoFactory.class
+DTO/DiagnosticoDto$Builder.class
 DAO/DaoFactory.class
 DTO/PacienteDto.class
+uml/version/RegistroDiagnosticoController.class
+DTO/DiagnosticoDto.class
+DAO/PacienteDaoImpl.class

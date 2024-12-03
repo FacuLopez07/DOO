@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DAO;
 
 import java.util.ArrayList;
@@ -6,30 +10,33 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import DTO.PacienteDto;
+import DTO.OrdenDto;
 
-public class PacienteDao implements Dao<PacienteDto> {
-    
+/**
+ *
+ * @author facundito
+ */
+public class OrdenDao implements Dao<OrdenDto> {
     private ConexionSql conexion;
-    private List<PacienteDto> pacientes;  // Definir la lista de pacientes
+    private List<OrdenDto> ordenes;  // Definir la lista de pacientes
 
     @Override
-    public PacienteDto buscar(PacienteDto dto) {
+    public OrdenDto buscar(OrdenDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<PacienteDto> listarPorCriterio(PacienteDto dto) {
+    public List<OrdenDto> listarPorCriterio(OrdenDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<PacienteDto> listarTodos() {
+    public List<OrdenDto> listarTodos() {
         this.conexion = new ConexionSql();
         Connection con;
         Statement sentencia = null;
         ResultSet rs = null;
-        List<PacienteDto> lista = new ArrayList<>();
+        List<OrdenDto> lista = new ArrayList<>();
 
         try {
             con = this.conexion.getConnection();
@@ -42,14 +49,14 @@ public class PacienteDao implements Dao<PacienteDto> {
 
             int id;
             String nombreCli, apellidoCli, dniCli;
-            PacienteDto cliente;
+            OrdenDto cliente;
 
             while (rs.next()) {
                 id = rs.getInt("c.id");
                 nombreCli = rs.getString("c.nombre");
                 apellidoCli = rs.getString("c.apellido");
                 dniCli = rs.getString("c.dni");
-                cliente = new PacienteDto(id, nombreCli, apellidoCli, dniCli);
+                cliente = new OrdenDto(id, nombreCli, apellidoCli, dniCli);
                 lista.add(cliente);
             }
 
@@ -64,36 +71,37 @@ public class PacienteDao implements Dao<PacienteDto> {
                 // Manejo de excepciones
             }
         }
-        pacientes = lista; // Asignar la lista de pacientes a la variable de instancia
+        ordenes = lista; // Asignar la lista de pacientes a la variable de instancia
         return lista;
     }
 
     @Override
-    public boolean insertar(PacienteDto dto) {
+    public boolean insertar(OrdenDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean modificar(PacienteDto dto) {
+    public boolean modificar(OrdenDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean borrar(PacienteDto dto) {
+    public boolean borrar(OrdenDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public PacienteDto obtenerPorOrden(int orden) {
-        if (pacientes == null) {
+    public OrdenDto obtenerPorOrden(int nro_orden) {
+        if (ordenes == null) {
             // Si la lista es nula, cargar los pacientes
             listarTodos();
         }
-        for (PacienteDto paciente : pacientes) {
-            if (paciente.getId() == orden) {
+        for (OrdenDto paciente : ordenes) {
+            if (paciente.getId() == nro_orden) {
                 return paciente;
             }
         }
         return null;
     }
 }
+

@@ -2,36 +2,45 @@ package uml.version;
 
 public class Paciente {
     private int orden;
-    private String nombre;
-    private String apellido;
-    private String dni;
-    private String estado;
+    private Persona persona;
+    private boolean jefe_familia;
 
-    public Paciente(int orden, String nombre, String apellido, String dni, String estado) {
+    public Paciente(int orden, String nombre, String apellido, String dni) {
         this.orden = orden;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.estado = estado;
+        
     }
 
-    public Integer getOrden() {
+    // Métodos de acceso para obtener los atributos de Paciente
+    public int getOrden() {
         return orden;
     }
-    
+
+    public boolean isJefeFamilia() {
+        return jefe_familia;
+    }
+
+    // Métodos de acceso para obtener los datos de la persona
     public String getNombre() {
-        return nombre;
+        return persona != null ? persona.getNombre() : null;
+    }
+
+    public String getApellido() {
+        return persona != null ? persona.getApellido() : null;
+    }
+
+    public String getTipoDni() {
+        return persona != null ? persona.getTipoDni() : null;
     }
     
-    public String getApellido() {
-        return apellido;
+    public String getNroDni() {
+        return persona != null ? persona.getNroDni() : null;
     }
 
-    public String getDni() {
-        return dni;
+    public String getDireccion() {
+        return persona != null ? persona.getDireccion() : null;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getFechaNacimiento() {
+        return persona != null ? persona.getFechaNacimiento() : null;
     }
 }
