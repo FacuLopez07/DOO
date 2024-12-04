@@ -14,14 +14,16 @@ public abstract class Persona {
     private String tipo_dni;
     private String nro_dni;
     private String direccion;
+    private String barrio;
     private String fecha_nacimiento;
     
-    public Persona(String nombre, String apellido, String tipo_dni, String nro_dni, String direccion, String fecha_nacimiento) {
+    public Persona(String nombre, String apellido, String tipo_dni, String nro_dni, String direccion, String barrio, String fecha_nacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipo_dni = tipo_dni;
         this.nro_dni = nro_dni;
         this.direccion = direccion;
+        this.barrio = barrio;
         this.fecha_nacimiento = fecha_nacimiento;
     }
     
@@ -45,6 +47,10 @@ public abstract class Persona {
     public String getDireccion() {
         return direccion;
     }
+    
+    public String getBarrio() {
+        return barrio;
+    }    
 
     public String getFechaNacimiento() {
         return fecha_nacimiento;

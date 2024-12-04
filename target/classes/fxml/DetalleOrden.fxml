@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="uml.version.DetallePacienteController">
+    <children>
+        <StackPane>
+            <VBox alignment="CENTER" prefHeight="358.0" prefWidth="340.0" spacing="10.0" style="-fx-padding: 20;">
+            <HBox prefHeight="23.0" prefWidth="300.0">
+               <children>
+                  <TextField prefHeight="26.0" prefWidth="141.0" promptText="Nro Orden" />
+                  <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
+                  <DatePicker prefHeight="26.0" prefWidth="188.0" />
+               </children>
+            </HBox>
+                <TextField fx:id="nombreField" editable="false" prefWidth="300.0" promptText="Nombre" />
+                <TextField fx:id="apellidoField" editable="false" prefWidth="300.0" promptText="Apellido" />
+            <HBox prefHeight="21.0" prefWidth="300.0">
+               <children>
+                      <TextField fx:id="dniField" editable="false" prefHeight="26.0" prefWidth="195.0" promptText="Nro DNI" />
+                  <Separator prefHeight="8.0" prefWidth="47.0" visible="false" />
+                  <ComboBox prefWidth="150.0" promptText="Tipo DNI" />
+               </children>
+            </HBox>
+                <TextField fx:id="estadoField" editable="false" prefWidth="300.0" promptText="Estado" />
+                
+                <HBox spacing="10.0">
+                    <Region minWidth="115" />
+                    <Button onAction="#handleClose" text="Cerrar" />
+                </HBox>
+            </VBox>
+        </StackPane>
+    </children>
+</AnchorPane>

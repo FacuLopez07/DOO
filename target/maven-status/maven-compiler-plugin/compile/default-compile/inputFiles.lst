@@ -1,16 +1,15 @@
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/DetallePacienteController.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/RegistroDiagnosticoController.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/PacienteDaoFactory.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/Paciente.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/RegistroPacienteController.java
-/home/facundito/NetBeansProjects/version/src/main/java/DTO/PacienteDto.java
-/home/facundito/NetBeansProjects/version/src/main/java/module-info.java
-/home/facundito/NetBeansProjects/version/src/main/java/DTO/DiagnosticoDto.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/App.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/ConsultaPrincipalController.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/DaoFactory.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/Dao.java
-/home/facundito/NetBeansProjects/version/src/main/java/uml/version/PrimaryController.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/PacienteDao.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/PacienteDaoImpl.java
-/home/facundito/NetBeansProjects/version/src/main/java/DAO/ConexionSql.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\Dao.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\DetalleOrdenController.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Persona.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\DaoFactory.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\RegistroPacienteController.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\ConexionSql.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\OrdenDaoFactory.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\ConsultaPrincipalController.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Orden.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\module-info.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DTO\OrdenDto.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Paciente.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\OrdenDao.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\App.java
+C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\PrimaryController.java
