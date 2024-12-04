@@ -96,7 +96,7 @@ public class ConsultaPrincipalController implements Initializable {
     private void handleRegister() {
         try {
             // Cargar el archivo FXML de RegistroPaciente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegistroPaciente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegistroNuevoPaciente.fxml"));
             Parent root = loader.load();
 
             // Crear una nueva escena con el contenido cargado

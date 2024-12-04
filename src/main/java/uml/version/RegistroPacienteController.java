@@ -8,13 +8,19 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import java.util.Arrays;
 import java.util.List;
+import java.time.LocalDate;
+import javafx.scene.control.DatePicker;
+
 
 public class RegistroPacienteController {
-
+    @FXML
+    private TextField nroPacienteField;
     @FXML
     private TextField nombreField;
     @FXML
     private TextField apellidoField;
+    @FXML
+    private TextField tipoDniField;
     @FXML
     private TextField dniField;
     @FXML
@@ -22,13 +28,11 @@ public class RegistroPacienteController {
     @FXML
     private TextField barrioField;
     @FXML
-    private TextField fechaNacimientoField;
+    private DatePicker fechaNacimientoField;
     @FXML
-    private TextField nroPacienteField;
+    private TextField jefeFamiliaField;
     @FXML
     private TextField obraSocialField;
-    @FXML
-    private TextField estadoField;
     @FXML
     private TextField alergiasField; // Campo adicional para alergias (separadas por comas)
     @FXML
@@ -55,16 +59,17 @@ public class RegistroPacienteController {
         // Obtener datos de los campos obligatorios
         String nombre = nombreField.getText();
         String apellido = apellidoField.getText();
+        String tipo_dni = tipoDniField.getText();
         String dni = dniField.getText();
         String direccion = direccionField.getText();
         String barrio = barrioField.getText();
-        String fechaNacimiento = fechaNacimientoField.getText();
+        LocalDate fechaNacimiento = fechaNacimientoField.getValue();
+        String jefe_familia = jefeFamiliaField.getText();
         String nroPacienteStr = nroPacienteField.getText();
         String obraSocial = obraSocialField.getText();
-        String estado = estadoField.getText();
 
         // Validar datos obligatorios
-        if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || direccion.isEmpty() || barrio.isEmpty() || fechaNacimiento.isEmpty() || nroPacienteStr.isEmpty()) {
+        if (nombre.isEmpty() || apellido.isEmpty() || tipo_dni.isEmpty() || dni.isEmpty() || direccion.isEmpty() || barrio.isEmpty() || fechaNacimiento == null || nroPacienteStr.isEmpty()) {
             showAlert(AlertType.ERROR, "Error de Validación", "Por favor, complete todos los campos obligatorios.");
             return;
         }
@@ -89,9 +94,9 @@ public class RegistroPacienteController {
         List<String> historialHospitalizaciones = processListInput(historialHospitalizacionesField.getText());
 
         // Crear el objeto Paciente usando el Builder
-        Paciente paciente = new Paciente.PacienteBuilder(nombre, apellido, "DNI", dni, direccion, barrio, fechaNacimiento, nroPaciente)
+        Paciente paciente = new Paciente.PacienteBuilder(nombre, apellido, "DNI", dni, direccion, barrio, fechaNacimiento.toString(), nroPaciente)
             .setObraSocial(obraSocial) // Opcional
-            .setJefeFamilia(estado.equalsIgnoreCase("sí") || estado.equalsIgnoreCase("jefe")) // Opcional
+            .setJefeFamilia(jefe_familia.equalsIgnoreCase("sí") || jefe_familia.equalsIgnoreCase("jefe")) // Opcional
             .setAlergias(alergias) // Opcional
             .setMedicamentosActuales(medicamentosActuales) // Opcional
             .setEnfermedadesCronicas(enfermedadesCronicas) // Opcional

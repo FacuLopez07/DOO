@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.RegistroPacienteController">
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.DetallePacienteController">
     <children>
         <StackPane>
             <VBox spacing="10.0" style="-fx-padding: 20;" alignment="CENTER">

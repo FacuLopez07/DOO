@@ -5,8 +5,10 @@
 package uml.version;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.DatePicker;
 
 /**
  *
@@ -14,13 +16,25 @@ import javafx.stage.Stage;
  */
 public class DetalleOrdenController {
     @FXML
+    private TextField nroOrdenField;
+    @FXML
+    private DatePicker fechaTurnoField;
+    @FXML
+    private TextField turnoField;
+    @FXML
     private TextField nombreField;
     @FXML
     private TextField apellidoField;
     @FXML
     private TextField dniField;
     @FXML
+    private TextField servicioField;
+    @FXML
     private TextField estadoField;
+    @FXML
+    private TextField diagnosticoField;
+    @FXML
+    private Button closeButton;
 
     // Método para cargar los datos del paciente en los campos de texto
     public void cargarDatosPaciente(Orden orden) {
