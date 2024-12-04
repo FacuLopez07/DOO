@@ -5,9 +5,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.PrimaryController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="uml.version.PrimaryController">
    <children>
       <Label text="Bienvenido a la Aplicación" />
+      <Label fx:id="connectionStatusLabel" text="Verificando conexión..." />
       <Button fx:id="consultaButton" text="Ingresar" onAction="#openConsultaPrincipal"/>
    </children>
    <padding>

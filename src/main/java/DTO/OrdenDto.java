@@ -20,7 +20,7 @@ public class OrdenDto {
     private Paciente paciente;
     
     // Constructor completo
-    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico, String fecha_consulta, String estado, Paciente paciente) {
+    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico) {
         this.nro_orden = nro_orden;
         this.servicio = servicio;
         this.turno = turno;
@@ -88,6 +88,10 @@ public class OrdenDto {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
+    }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

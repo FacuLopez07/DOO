@@ -13,9 +13,7 @@ import java.sql.SQLException;
  * @author facundito
  */
 public class ConexionSql {
-    private static final String URL = "jdbc:mysql://localhost:3306/ejemplo-completo-fx-2024?allowPublicKeyRetrieval=true&useSSL=false";
-    private static final String USER = "doo-2024";
-    private static final String PASSWORD = "doo-2024";
+    private static final String URL = "jdbc:sqlite:baseDeDatos.db";// Cambia esto a la ubicación de tu archivo SQLite
     private Connection connection = null;
 
     public ConexionSql() {
@@ -24,11 +22,13 @@ public class ConexionSql {
 
     private void abrir() {
         try {
-//            Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            this.connection = DriverManager.getConnection(URL);
+            System.out.println("ATR");
         } catch (SQLException e) {
             this.connection = null;
-        } 
+            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     public Connection getConnection() {
@@ -37,9 +37,13 @@ public class ConexionSql {
 
     public void cerrar() {
         try {
-            this.connection.close();
+            if (this.connection != null) {
+                this.connection.close();
+                System.out.println("Conexión cerrada");
+            }
         } catch (SQLException ex) {
             this.connection = null;
+            System.out.println("Error al cerrar la conexión: " + ex.getMessage());
         }
     }
 }
