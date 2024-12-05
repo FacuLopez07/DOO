@@ -41,9 +41,8 @@ public class OrdenDao implements Dao<OrdenDto> {
 
         try {
             con = this.conexion.getConnection();
-            String sql = "SELECT c.nro_orden, c.servicio, c.turno, c.diagnostico, c.fecha_consulta, c.estado, c.paciente_id "
-                       + "FROM orden c "
-                       + "ORDER BY c.fecha_consulta";
+            String sql = "SELECT nro_orden, servicio, turno, diagnostico, fecha_consulta, estado, paciente_id "
+                       + "FROM orden  " ;
             sentencia = con.createStatement();
 
             rs = sentencia.executeQuery(sql);
@@ -53,13 +52,13 @@ public class OrdenDao implements Dao<OrdenDto> {
             OrdenDto orden;
 
             while (rs.next()) {
-                nroOrden = rs.getInt("c.nro_orden");
-                servicio = rs.getString("c.servicio");
-                turno = rs.getString("c.turno");
-                diagnostico = rs.getString("c.diagnostico");
-                fechaConsulta = rs.getString("c.fecha_consulta");
-                estado = rs.getString("c.estado");
-                pacienteId = rs.getInt("c.paciente_id");
+                nroOrden = rs.getInt("nro_orden");
+                servicio = rs.getString("servicio");
+                turno = rs.getString("turno");
+                diagnostico = rs.getString("diagnostico");
+                fechaConsulta = rs.getString("fecha_consulta");
+                estado = rs.getString("estado");
+                pacienteId = rs.getInt("paciente_id");
 
                 orden = new OrdenDto(nroOrden, servicio, turno, diagnostico, fechaConsulta, estado, pacienteId);
                 lista.add(orden);

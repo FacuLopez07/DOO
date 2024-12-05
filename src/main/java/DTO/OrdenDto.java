@@ -20,12 +20,12 @@ public class OrdenDto {
     private Paciente paciente;
     
     // Constructor completo
-    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico, String fechaConsulta, String estado1, int pacienteId) {
+    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico, String fechaConsulta, String estado, int pacienteId) {
         this.nro_orden = nro_orden;
         this.servicio = servicio;
         this.turno = turno;
         this.diagnostico = diagnostico;
-        this.fecha_consulta = fecha_consulta;
+        this.fecha_consulta = fechaConsulta;
         this.estado = estado;
         this.paciente = paciente; // Paciente se pasa como un objeto.
     }

@@ -38,22 +38,25 @@ public class ConsultaPrincipalController implements Initializable {
     @FXML
     private TableColumn<Orden, Integer> columnOrden;
     @FXML
-    private TableColumn<Orden, String> columnNombre;
+    private TableColumn<Orden, String> columnServicio;
     @FXML
-    private TableColumn<Orden, String> columnApellido;
+    private TableColumn<Orden, String> columnTurno;
     @FXML
-    private TableColumn<Orden, String> columnDni;
+    private TableColumn<Orden, String> columnDiagnostico;
+    @FXML
+    private TableColumn<Orden, String> columnFechaConsulta;
     @FXML
     private TableColumn<Orden, String> columnEstado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Inicializa las columnas de la tabla
-        columnOrden.setCellValueFactory(new PropertyValueFactory<>("orden"));
-        columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-        columnDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
-        columnEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        columnOrden.setCellValueFactory(new PropertyValueFactory<>("NroOrden"));
+        columnServicio.setCellValueFactory(new PropertyValueFactory<>("Servicio"));
+        columnTurno.setCellValueFactory(new PropertyValueFactory<>("Turno"));
+        columnDiagnostico.setCellValueFactory(new PropertyValueFactory<>("Diagnostico"));
+        columnFechaConsulta.setCellValueFactory(new PropertyValueFactory<>("FechaConsulta"));
+        columnEstado.setCellValueFactory(new PropertyValueFactory<>("Estado"));
 
         // Cargar los datos de pacientes
         cargarPacientes();
