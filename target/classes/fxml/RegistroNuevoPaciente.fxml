@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -17,46 +16,46 @@
             <VBox alignment="CENTER" prefHeight="641.0" prefWidth="340.0" spacing="10.0" style="-fx-padding: 20;">
             <HBox prefHeight="23.0" prefWidth="300.0">
                <children>
-                  <TextField fx:id="nroOrdenField" prefHeight="26.0" prefWidth="141.0" promptText="Nro Orden" />
+                  <TextField fx:id="nroPacienteField" prefHeight="26.0" prefWidth="141.0" promptText="Nro Paciente" />
                   <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
-                  <DatePicker fx:id="fechaTurnoField" prefHeight="26.0" prefWidth="188.0" promptText="Fecha Turno" />
                </children>
             </HBox>
-                <TextField fx:id="nombreField" editable="false" prefWidth="300.0" promptText="Nombre" />
-                <TextField fx:id="apellidoField" editable="false" prefWidth="300.0" promptText="Apellido" />
+                <TextField fx:id="nombreField" prefWidth="300.0" promptText="Nombre" />
+                <TextField fx:id="apellidoField" prefWidth="300.0" promptText="Apellido" />
             <HBox prefHeight="21.0" prefWidth="300.0">
-               <children>
-                  <ComboBox fx:id="comboBoxTipoDniField" prefWidth="150.0" promptText="Tipo DNI" />
-                  <Separator prefHeight="8.0" prefWidth="47.0" visible="false" />
-                      <TextField fx:id="nroDniField" editable="false" prefHeight="26.0" prefWidth="195.0" promptText="Nro DNI" />
-               </children>
+                <children>
+                    <TextField fx:id="tipoDniField" prefHeight="26.0" prefWidth="195.0" promptText="Tipo DNI" />
+                    <Separator prefHeight="8.0" prefWidth="47.0" visible="false" />
+                  <TextField fx:id="nroDniField" layoutX="57.0" layoutY="10.0" prefHeight="26.0" prefWidth="195.0" promptText="Nro DNI" />
+                </children>
             </HBox>
-                <TextField fx:id="direccionField" editable="false" prefWidth="300.0" promptText="Direccion" />
-            <TextField fx:id="barrioField" editable="false" layoutX="30.0" layoutY="230.0" prefWidth="300.0" promptText="Barrio" />
+
+                <TextField fx:id="direccionField" prefWidth="300.0" promptText="Direccion" />
+            <TextField fx:id="barrioField" layoutX="30.0" layoutY="230.0" prefWidth="300.0" promptText="Barrio" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <DatePicker fx:id="fechaNacimientoField" prefHeight="26.0" prefWidth="300.0" promptText="Nacimiento" />
                   <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
-                  <TextField fx:id="jefeFamiliaField" editable="false" prefWidth="300.0" promptText="Jefe Familia" />
+                  <TextField fx:id="jefeFamiliaField" prefWidth="300.0" promptText="Jefe Familia" />
                </children>
             </HBox>
-            <TextField fx:id="obraSocialField" editable="false" layoutX="30.0" layoutY="301.0" prefWidth="300.0" promptText="Obra Social" />
-            <TextField fx:id="alergiasField" alignment="TOP_LEFT" editable="false" layoutX="30.0" layoutY="230.0" prefHeight="41.0" prefWidth="300.0" promptText="Alergias" />
-            <TextField fx:id="medActualesField" alignment="TOP_LEFT" editable="false" layoutX="30.0" layoutY="391.0" prefHeight="41.0" prefWidth="300.0" promptText="Medicamentos Actuales" />
-            <TextField fx:id="enferCronicasField" alignment="TOP_LEFT" editable="false" layoutX="30.0" layoutY="416.0" prefHeight="41.0" prefWidth="300.0" promptText="Enfermedades Cronicas" />
+            <TextField fx:id="obraSocialField" layoutX="30.0" layoutY="301.0" prefWidth="300.0" promptText="Obra Social" />
+            <TextField fx:id="alergiasField" alignment="TOP_LEFT" layoutX="30.0" layoutY="230.0" prefHeight="41.0" prefWidth="300.0" promptText="Alergias" />
+            <TextField fx:id="medActualesField" alignment="TOP_LEFT" layoutX="30.0" layoutY="391.0" prefHeight="41.0" prefWidth="300.0" promptText="Medicamentos Actuales" />
+            <TextField fx:id="enferCronicasField" alignment="TOP_LEFT" layoutX="30.0" layoutY="416.0" prefHeight="41.0" prefWidth="300.0" promptText="Enfermedades Cronicas" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Contacto Emergencia" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="contactoEmerNombreField" editable="false" prefWidth="300.0" promptText="Nombre" />
+                        <TextField fx:id="contactoEmerNombreField" prefWidth="300.0" promptText="Nombre" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="contactoEmerRelacion" editable="false" prefWidth="300.0" promptText="Relacion" />
+                        <TextField fx:id="contactoEmerRelacion" prefWidth="300.0" promptText="Relacion" />
                         <Separator prefHeight="8.0" prefWidth="47.0" visible="false" />
-                        <TextField fx:id="contactoEmerNroField" editable="false" prefWidth="300.0" promptText="Nro" />
+                        <TextField fx:id="contactoEmerNroField" prefWidth="300.0" promptText="Nro" />
                      </children>
                   </HBox>
                </children>
@@ -66,9 +65,9 @@
                   <Label text="Historia Clinica" />
                   <HBox prefHeight="66.0" prefWidth="300.0">
                      <children>
-                        <TextField fx:id="cirugiasField" alignment="TOP_LEFT" editable="false" prefHeight="62.0" prefWidth="145.0" promptText="Cirugias" />
+                        <TextField fx:id="cirugiasField" alignment="TOP_LEFT" prefHeight="62.0" prefWidth="145.0" promptText="Cirugias" />
                         <Separator prefHeight="6.0" prefWidth="4.0" visible="false" />
-                        <TextField fx:id="hospitalizacionesField" alignment="TOP_LEFT" editable="false" prefHeight="56.0" prefWidth="143.0" promptText="Hospitalizaciones" />
+                        <TextField fx:id="hospitalizacionesField" alignment="TOP_LEFT" prefHeight="56.0" prefWidth="143.0" promptText="Hospitalizaciones" />
                      </children>
                   </HBox>
                </children>
