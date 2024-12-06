@@ -89,14 +89,14 @@ public class RegistroPacienteController {
         }
 
         // Procesar datos opcionales
-        List<String> alergias = processListInput(alergiasField.getText());
-        List<String> medicamentosActuales = processListInput(medicamentosActualesField.getText());
-        List<String> enfermedadesCronicas = processListInput(enfermedadesCronicasField.getText());
+        String alergias = alergiasField.getText();
+        String medicamentosActuales = medicamentosActualesField.getText();
+        String enfermedadesCronicas = enfermedadesCronicasField.getText();
         String contactoEmergenciaNombre = contactoEmergenciaNombreField.getText();
         String contactoEmergenciaTelefono = contactoEmergenciaTelefonoField.getText();
         String contactoEmergenciaRelacion = contactoEmergenciaRelacionField.getText();
-        List<String> historialCirugias = processListInput(historialCirugiasField.getText());
-        List<String> historialHospitalizaciones = processListInput(historialHospitalizacionesField.getText());
+        String historialCirugias = historialCirugiasField.getText();
+        String historialHospitalizaciones = historialHospitalizacionesField.getText();
 
         // Crear el objeto PacienteDto usando el Builder
         PacienteDto pacienteDto = new PacienteDto.PacienteBuilder(
@@ -123,11 +123,6 @@ public class RegistroPacienteController {
         } else {
             showAlert(AlertType.ERROR, "Error al registrar", "No se pudo registrar al paciente.");
         }
-    }
-
-    // Procesa campos que son listas separadas por comas
-    private List<String> processListInput(String input) {
-        return input.isEmpty() ? List.of() : Arrays.asList(input.split(","));
     }
 
     // Muestra un mensaje de alerta

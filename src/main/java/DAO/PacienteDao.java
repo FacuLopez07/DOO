@@ -79,14 +79,14 @@ public class PacienteDao implements Dao<PacienteDto> {
             pstmt.setInt(2, dto.getNroPaciente());
             pstmt.setBoolean(3, dto.isJefeFamilia());
             pstmt.setString(4, dto.getObraSocial());
-            pstmt.setString(5, String.join(",", dto.getAlergias()));
-            pstmt.setString(6, String.join(",", dto.getMedicamentosActuales()));
-            pstmt.setString(7, String.join(",", dto.getEnfermedadesCronicas()));
+            pstmt.setString(5, dto.getAlergias());
+            pstmt.setString(6, dto.getMedicamentosActuales());
+            pstmt.setString(7, dto.getEnfermedadesCronicas());
             pstmt.setString(8, dto.getContactoEmergenciaNombre());
             pstmt.setString(9, dto.getContactoEmergenciaTelefono());
             pstmt.setString(10, dto.getContactoEmergenciaRelacion());
-            pstmt.setString(11, String.join(",", dto.getHistorialCirugias()));
-            pstmt.setString(12, String.join(",", dto.getHistorialHospitalizaciones()));
+            pstmt.setString(11, dto.getHistorialCirugias());
+            pstmt.setString(12, dto.getHistorialHospitalizaciones());
 
             filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas == 0) {

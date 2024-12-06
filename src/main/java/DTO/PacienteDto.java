@@ -14,14 +14,14 @@ public class PacienteDto extends PersonaDto {
     private int nro_paciente; // Obligatorio
     private boolean jefe_familia; // Opcional
     private String obra_social;
-    private List<String> alergias; // Opcional
-    private List<String> medicamentosActuales; // Opcional
-    private List<String> enfermedadesCronicas; // Opcional
+    private String alergias; // Opcional
+    private String medicamentosActuales; // Opcional
+    private String enfermedadesCronicas; // Opcional
     private String contactoEmergenciaNombre; // Opcional
     private String contactoEmergenciaTelefono; // Opcional
     private String contactoEmergenciaRelacion; // Opcional
-    private List<String> historialCirugias; // Opcional
-    private List<String> historialHospitalizaciones; // Opcional
+    private String historialCirugias; // Opcional
+    private String historialHospitalizaciones; // Opcional
 
     // Constructor privado
     private PacienteDto(PacienteBuilder builder) {
@@ -51,15 +51,15 @@ public class PacienteDto extends PersonaDto {
        return obra_social;
     }
     
-    public List<String> getAlergias() {
+    public String getAlergias() {
         return alergias;
     }
 
-    public List<String> getMedicamentosActuales() {
+    public String getMedicamentosActuales() {
         return medicamentosActuales;
     }
 
-    public List<String> getEnfermedadesCronicas() {
+    public String getEnfermedadesCronicas() {
         return enfermedadesCronicas;
     }
     
@@ -75,11 +75,11 @@ public class PacienteDto extends PersonaDto {
         return contactoEmergenciaRelacion;
     }
 
-    public List<String> getHistorialCirugias() {
+    public String getHistorialCirugias() {
         return historialCirugias;
     }
 
-    public List<String> getHistorialHospitalizaciones() {
+    public String getHistorialHospitalizaciones() {
         return historialHospitalizaciones;
     }
 
@@ -98,14 +98,14 @@ public class PacienteDto extends PersonaDto {
         // Atributos opcionales
         private boolean jefe_familia = false; // Valor predeterminado
         private String obra_social = "";
-        private List<String> alergias; // Opcional
-        private List<String> medicamentosActuales; // Opcional
-        private List<String> enfermedadesCronicas; // Opcional
+        private String alergias; // Opcional
+        private String medicamentosActuales; // Opcional
+        private String enfermedadesCronicas; // Opcional
         private String contactoEmergenciaNombre; // Opcional
         private String contactoEmergenciaTelefono; // Opcional
         private String contactoEmergenciaRelacion; // Opcional
-        private List<String> historialCirugias; // Opcional
-        private List<String> historialHospitalizaciones; // Opcional
+        private String historialCirugias; // Opcional
+        private String historialHospitalizaciones; // Opcional
         
         // Constructor del Builder con atributos obligatorios
         public PacienteBuilder(String nombre, String apellido, String tipo_dni, String nro_dni, String direccion,String barrio, String fecha_nacimiento, int nro_paciente) {
@@ -130,17 +130,17 @@ public class PacienteDto extends PersonaDto {
         }
         
         
-        public PacienteBuilder setAlergias(List<String> alergias) {
+        public PacienteBuilder setAlergias(String alergias) {
             this.alergias = alergias;
             return this;
         }
 
-        public PacienteBuilder setMedicamentosActuales(List<String> medicamentosActuales) {
+        public PacienteBuilder setMedicamentosActuales(String medicamentosActuales) {
             this.medicamentosActuales = medicamentosActuales;
             return this;
         }
 
-        public PacienteBuilder setEnfermedadesCronicas(List<String> enfermedadesCronicas) {
+        public PacienteBuilder setEnfermedadesCronicas(String enfermedadesCronicas) {
             this.enfermedadesCronicas = enfermedadesCronicas;
             return this;
         }
@@ -160,12 +160,12 @@ public class PacienteDto extends PersonaDto {
             return this;
         }
 
-        public PacienteBuilder setHistorialCirugias(List<String> historialCirugias) {
+        public PacienteBuilder setHistorialCirugias(String historialCirugias) {
             this.historialCirugias = historialCirugias;
             return this;
         }
 
-        public PacienteBuilder setHistorialHospitalizaciones(List<String> historialHospitalizaciones) {
+        public PacienteBuilder setHistorialHospitalizaciones(String historialHospitalizaciones) {
             this.historialHospitalizaciones = historialHospitalizaciones;
             return this;
         }
