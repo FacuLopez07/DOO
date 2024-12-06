@@ -88,6 +88,11 @@ public class OrdenDao implements Dao<OrdenDto> {
 
         try {
             con = this.conexion.getConnection();
+            //INSERT INTO personas (nombre, apellido, tipo_dnim direccion, barrio, fecha_nacimiento)
+            
+            //INSERT INTO pacientes (nro_paciente, jefe_familia, obra_social, alergias, medicamentos_actuales, enfermedades_cronicas, contacto_emergencia_nombre, contacto_emergencia_telefono, contacto_emergencia_relacion, historial_cirugias, historial_hospitalizaciones)
+            
+            
             String sql = "INSERT INTO orden (nro_orden, servicio, turno, diagnostico, fecha_consulta, estado, paciente_id) "
                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);

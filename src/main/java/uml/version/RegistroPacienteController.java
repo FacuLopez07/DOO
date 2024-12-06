@@ -1,21 +1,22 @@
 package uml.version;
 
+import DAO.PacienteDao;
+import DTO.PacienteDto;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Button;
+
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.time.LocalDate;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ComboBox;
-import javafx.collections.FXCollections;
-
-
+import javafx.stage.Stage;
 
 public class RegistroPacienteController {
+
+    // Campos del formulario
     @FXML
     private TextField nroPacienteField;
     @FXML
@@ -37,11 +38,11 @@ public class RegistroPacienteController {
     @FXML
     private TextField obraSocialField;
     @FXML
-    private TextField alergiasField; // Campo adicional para alergias (separadas por comas)
+    private TextField alergiasField;
     @FXML
-    private TextField medicamentosActualesField; // Campo adicional para medicamentos actuales
+    private TextField medicamentosActualesField;
     @FXML
-    private TextField enfermedadesCronicasField; // Campo adicional para enfermedades crónicas
+    private TextField enfermedadesCronicasField;
     @FXML
     private TextField contactoEmergenciaNombreField;
     @FXML
@@ -49,31 +50,31 @@ public class RegistroPacienteController {
     @FXML
     private TextField contactoEmergenciaRelacionField;
     @FXML
-    private TextField historialCirugiasField; // Campo adicional para historial de cirugías
+    private TextField historialCirugiasField;
     @FXML
-    private TextField historialHospitalizacionesField; // Campo adicional para historial de hospitalizaciones
+    private TextField historialHospitalizacionesField;
     @FXML
     private Button saveButton;
     @FXML
     private Button cancelButton;
-    
+
+    // DAO para manejar la base de datos
+    private PacienteDao pacienteDao = new PacienteDao();
 
     @FXML
     private void handleSave() {
-        // Obtener datos de los campos obligatorios
+        // Validar y obtener datos del formulario
         String nro_paciente = nroPacienteField.getText();
         String nombre = nombreField.getText();
         String apellido = apellidoField.getText();
         String tipo_dni = tipoDniField.getText();
-        String dni = nroDniField.getText();
+        String nro_dni = nroDniField.getText();
         String direccion = direccionField.getText();
         String barrio = barrioField.getText();
         LocalDate fecha_nacimiento = fechaNacimientoField.getValue();
-        String jefe_familia = jefeFamiliaField.getText();
-        String obra_social = obraSocialField.getText();
 
         // Validar datos obligatorios
-        if (nro_paciente.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || tipo_dni.isEmpty() || dni.isEmpty() || direccion.isEmpty() || barrio.isEmpty() || fecha_nacimiento == null) {
+        if (nro_paciente.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || tipo_dni.isEmpty() || nro_dni.isEmpty() || direccion.isEmpty() || barrio.isEmpty() || fecha_nacimiento == null) {
             showAlert(AlertType.ERROR, "Error de Validación", "Por favor, complete todos los campos obligatorios.");
             return;
         }
@@ -97,43 +98,39 @@ public class RegistroPacienteController {
         List<String> historialCirugias = processListInput(historialCirugiasField.getText());
         List<String> historialHospitalizaciones = processListInput(historialHospitalizacionesField.getText());
 
-        // Crear el objeto Paciente usando el Builder
-        Paciente paciente = new Paciente.PacienteBuilder(nombre, apellido, "DNI", dni, direccion, barrio, fecha_nacimiento.toString(), nroPaciente)
-            .setObraSocial(obra_social) // Opcional
-            .setJefeFamilia(jefe_familia.equalsIgnoreCase("sí") || jefe_familia.equalsIgnoreCase("jefe")) // Opcional
-            .setAlergias(alergias) // Opcional
-            .setMedicamentosActuales(medicamentosActuales) // Opcional
-            .setEnfermedadesCronicas(enfermedadesCronicas) // Opcional
-            .setContactoEmergenciaNombre(contactoEmergenciaNombre) // Opcional
-            .setContactoEmergenciaTelefono(contactoEmergenciaTelefono) // Opcional
-            .setContactoEmergenciaRelacion(contactoEmergenciaRelacion) // Opcional
-            .setHistorialCirugias(historialCirugias) // Opcional
-            .setHistorialHospitalizaciones(historialHospitalizaciones) // Opcional
+        // Crear el objeto PacienteDto usando el Builder
+        PacienteDto pacienteDto = new PacienteDto.PacienteBuilder(
+            nombre, apellido, tipo_dni, nro_dni, direccion, barrio, fecha_nacimiento.toString(), nroPaciente
+        )
+            .setJefeFamilia(jefeFamiliaField.getText().equalsIgnoreCase("sí") || jefeFamiliaField.getText().equalsIgnoreCase("jefe"))
+            .setObraSocial(obraSocialField.getText())
+            .setAlergias(alergias)
+            .setMedicamentosActuales(medicamentosActuales)
+            .setEnfermedadesCronicas(enfermedadesCronicas)
+            .setContactoEmergenciaNombre(contactoEmergenciaNombre)
+            .setContactoEmergenciaTelefono(contactoEmergenciaTelefono)
+            .setContactoEmergenciaRelacion(contactoEmergenciaRelacion)
+            .setHistorialCirugias(historialCirugias)
+            .setHistorialHospitalizaciones(historialHospitalizaciones)
             .build();
 
-        // Lógica adicional: guardar en la base de datos o registrar en logs
-        System.out.println("Paciente registrado:");
-        System.out.println("Nombre: " + paciente.getNombre());
-        System.out.println("Apellido: " + paciente.getApellido());
-        System.out.println("DNI: " + paciente.getTipoDni() + " " + paciente.getNroDni());
-        System.out.println("Número de paciente: " + paciente.getNroPaciente());
-        System.out.println("Obra social: " + paciente.getObraSocial());
-        System.out.println("Es jefe de familia: " + paciente.isJefeFamilia());
-        System.out.println("Alergias: " + paciente.getAlergias());
-        System.out.println("Medicamentos actuales: " + paciente.getMedicamentosActuales());
-        System.out.println("Enfermedades crónicas: " + paciente.getEnfermedadesCronicas());
-        System.out.println("Historial de cirugías: " + paciente.getHistorialCirugias());
-        System.out.println("Historial de hospitalizaciones: " + paciente.getHistorialHospitalizaciones());
+        // Guardar el paciente en la base de datos
+        boolean guardado = pacienteDao.insertar(pacienteDto);
 
-        // Mostrar alerta de éxito
-        showAlert(AlertType.INFORMATION, "Registro exitoso", "Se registró al paciente exitosamente.");
-        ((Stage) saveButton.getScene().getWindow()).close();
+        if (guardado) {
+            showAlert(AlertType.INFORMATION, "Registro exitoso", "Se registró al paciente exitosamente.");
+            ((Stage) saveButton.getScene().getWindow()).close();
+        } else {
+            showAlert(AlertType.ERROR, "Error al registrar", "No se pudo registrar al paciente.");
+        }
     }
 
+    // Procesa campos que son listas separadas por comas
     private List<String> processListInput(String input) {
         return input.isEmpty() ? List.of() : Arrays.asList(input.split(","));
     }
 
+    // Muestra un mensaje de alerta
     private void showAlert(AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
