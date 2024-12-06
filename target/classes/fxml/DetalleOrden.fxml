@@ -23,7 +23,7 @@
                <children>
                   <TextField fx:id="turnoField" editable="false" prefHeight="26.0" prefWidth="141.0" promptText="Turno" />
                   <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
-                  <DatePicker fx:id="fechaTurnoField" editable="false" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fechaConsultaField" editable="false" prefHeight="26.0" prefWidth="188.0" />
                </children>
             </HBox>
                 <TextField fx:id="nombreField" editable="false" prefWidth="300.0" promptText="Nombre" />

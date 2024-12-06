@@ -41,7 +41,6 @@ public class ConsultaPrincipalController implements Initializable {
     private TableColumn<Object, Integer> columnOrden;
     @FXML
     private TableColumn<Object, String> columnServicio;
- 
     @FXML
     private TableColumn<Object, String> columnFechaConsulta;
     @FXML
@@ -74,17 +73,25 @@ public class ConsultaPrincipalController implements Initializable {
                 System.out.println("Orden: " + orden.getNroOrden() + 
                     ", Paciente asociado: " + orden.getPaciente());
 
-                PacienteDto paciente = pacientes.stream()
-                    .filter(p -> p.getNroPaciente() == orden.getPaciente())
-                    .findFirst()
-                    .orElse(null);
+                PacienteDto paciente = null;
+                for (PacienteDto p : pacientes) {
+                    if (p.getNroPaciente() == orden.getPaciente()) { // Ajustar según los tipos de datos
+                        paciente = p;
+                        break; // Terminar el bucle una vez encontrado
+                    }
+                }
 
                 if (paciente != null) {
                     vistaDatos.add(new VistaOrdenPaciente(
                         orden.getNroOrden(),
                         paciente.getNroDni(),
                         orden.getServicio(),
-                        orden.getFechaConsulta()
+                        orden.getFechaConsulta(),
+                        paciente.getNombre(),
+                        orden.getTurno(),
+                        paciente.getApellido(),
+                        orden.getEstado(),
+                        orden.getDiagnostico()                        
                     ));
                 } else {
                     System.out.println("Paciente no encontrado para la orden: " + orden.getNroOrden());
@@ -95,7 +102,12 @@ public class ConsultaPrincipalController implements Initializable {
                     orden.getNroOrden(),
                     "Sin DNI", // Valor predeterminado
                     orden.getServicio(),
-                    orden.getFechaConsulta()
+                    orden.getFechaConsulta(),
+                    "Sin Nombre",
+                    "Sin Apellido",
+                    orden.getTurno(),
+                    orden.getEstado(),
+                    orden.getDiagnostico()
                 ));
             }
         }
@@ -143,24 +155,38 @@ public class ConsultaPrincipalController implements Initializable {
    
     @FXML
     private void handleViewDetails() {
-        // Obtener el elemento seleccionado en la tabla
-        Object selectedItem = tableViewPacientes.getSelectionModel().getSelectedItem();
+        VistaOrdenPaciente selectedOrder = (VistaOrdenPaciente) tableViewPacientes.getSelectionModel().getSelectedItem();
 
-        if (selectedItem != null) {
-            // Mostrar un mensaje básico indicando que se seleccionó un elemento
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Elemento seleccionado");
-            alert.setHeaderText("Detalles del elemento");
-            alert.setContentText("Se seleccionó un elemento en la tabla.");
-            alert.showAndWait();
+        if (selectedOrder != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetalleOrden.fxml"));
+                Parent root = loader.load();
+
+                DetalleOrdenController detalleController = loader.getController();
+
+                // Cargar los detalles directamente desde VistaOrdenPaciente
+                detalleController.cargarDatosPaciente(selectedOrder);
+
+                Stage stage = new Stage();
+                stage.setTitle("Detalles de la Orden");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al cargar la vista de detalle");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         } else {
-            // Mostrar una advertencia si no se selecciona nada
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un elemento para ver los detalles.");
+            alert.setContentText("Por favor, selecciona una orden para ver los detalles.");
             alert.showAndWait();
         }
     }
+
 
 }
