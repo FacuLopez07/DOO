@@ -56,8 +56,8 @@ public class ConsultaPacientesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Inicializa las columnas de la tabla
         nroPaciente.setCellValueFactory(new PropertyValueFactory<>("NroPaciente"));
-        columnDni.setCellValueFactory(new PropertyValueFactory<>("Apellido"));
-        columnApellido.setCellValueFactory(new PropertyValueFactory<>("NroDni"));
+        columnDni.setCellValueFactory(new PropertyValueFactory<>("NroDni"));
+        columnApellido.setCellValueFactory(new PropertyValueFactory<>("Apellido"));
         columnNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
 
         // Cargar los datos de pacientes
@@ -65,30 +65,52 @@ public class ConsultaPacientesController implements Initializable {
     }
     
     private void cargarPaciente() {
-        
-        Dao<PacienteDto> pacienteDao = DaoFactory.getPacienteDao(PacienteDto.class);
-        List<PacienteDto> pacientes = pacienteDao.listarTodos();
-        
-        for (PacienteDto dto : pacientes) {
-            // Usar el PacienteBuilder para construir el objeto Paciente
-            Paciente.PacienteBuilder builder = new Paciente.PacienteBuilder(
-                dto.getNombre(),
-                dto.getApellido(),
-                dto.getTipoDni(),
-                dto.getNroDni(),
-                dto.getDireccion(),
-                dto.getBarrio(),
-                dto.getFechaNacimiento(),
-                dto.getNroPaciente()
-            );
+    // Obtener el DAO para pacientes
+    Dao<PacienteDto> pacienteDao = DaoFactory.getPacienteDao(PacienteDto.class);
 
-            // Construir el objeto Paciente
-            Paciente paciente = builder.build();
+    // Obtener la lista de pacientes
+    List<PacienteDto> pacientes = pacienteDao.listarTodos();
 
-            // Agregar el paciente a la tabla
-            tableViewPacientes.getItems().add(paciente);
+    // Crear una lista para almacenar los datos procesados
+    List<VistaPaciente> vistaPacientes = new ArrayList<>();
+
+    for (PacienteDto paciente : pacientes) {
+        if (paciente != null) {
+            // Imprimir información de depuración
+            System.out.println("Paciente encontrado: " + paciente.getNroPaciente() + 
+                ", Nombre: " + paciente.getNombre() + ", Apellido: " + paciente.getApellido());
+
+            // Agregar los datos del paciente a la lista de vista
+            vistaPacientes.add(new VistaPaciente(
+                paciente.getNroPaciente(),
+                paciente.getTipoDni(),
+                paciente.getNroDni(),
+                paciente.getNombre(),
+                paciente.getApellido(),
+                paciente.getDireccion(),
+                paciente.getBarrio(),
+                paciente.isJefeFamilia(),
+                paciente.getFechaNacimiento(),
+                paciente.getObraSocial(),
+                paciente.getAlergias() != null ? paciente.getAlergias() : "Sin información",
+                paciente.getMedicamentosActuales() != null ? paciente.getMedicamentosActuales() : "Sin información",
+                paciente.getEnfermedadesCronicas() != null ? paciente.getEnfermedadesCronicas() : "Sin información",
+                paciente.getContactoEmergenciaNombre() != null ? paciente.getContactoEmergenciaNombre() : "Sin información",
+                paciente.getContactoEmergenciaTelefono() != null ? paciente.getContactoEmergenciaTelefono() : "Sin información",
+                paciente.getContactoEmergenciaRelacion() != null ? paciente.getContactoEmergenciaRelacion() : "Sin información",
+                paciente.getHistorialCirugias() != null ? paciente.getHistorialCirugias() : "Sin información",
+                paciente.getHistorialHospitalizaciones() != null ? paciente.getHistorialHospitalizaciones() : "Sin información"
+            ));
+        } else {
+            System.out.println("Paciente nulo encontrado en la lista.");
         }
     }
+
+    // Limpiar y actualizar el TableView con los datos procesados
+    tableViewPacientes.getItems().clear();
+    tableViewPacientes.getItems().addAll(vistaPacientes);
+}
+
     
     
     @FXML
@@ -98,61 +120,39 @@ public class ConsultaPacientesController implements Initializable {
     
     @FXML
     private void handleViewDetails() {
-        // Obtener el paciente seleccionado en la tabla
-        Paciente selectedPaciente = tableViewPacientes.getSelectionModel().getSelectedItem();
-        
+       VistaPaciente selectedPaciente = (VistaPaciente) tableViewPacientes.getSelectionModel().getSelectedItem();
+
         if (selectedPaciente != null) {
             try {
-                // Usar el Factory para obtener el DAO
-                Dao<PacienteDto> pacienteDao = DaoFactory.getDao(PacienteDto.class);
-
-                // Obtener los detalles del paciente desde el DAO
-                PacienteDto pacienteDto = pacienteDao.obtenerPorOrden(selectedPaciente.getNroOrden());
-
-                // Convertir el DTO en un modelo Paciente
-                Orden orden = new Orden(
-                    pacienteDto.getNroOrden(),
-                    pacienteDto.getServicio(),
-                    pacienteDto.getTurno(),
-                    pacienteDto.getDiagnostico(),
-                    pacienteDto.getFechaConsulta(),
-                    pacienteDto.getEstado(),
-                    pacienteDto.getPaciente()
-                );
-
-                // Cargar la vista de DetallePaciente
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetallePaciente.fxml"));
                 Parent root = loader.load();
 
-                // Obtener el controlador de la vista de detalle
-                DetallePacienteController detalleController = loader.getController();
-                detalleController.cargarDatosPaciente(orden); // Pasar el modelo al controlador
+                DetallePacienteController pacienteController = loader.getController();
 
-                // Crear y mostrar la nueva ventana
+                // Cargar los detalles directamente desde VistaOrdenPaciente
+                pacienteController.cargarPaciente(selectedPaciente);
+
                 Stage stage = new Stage();
-                stage.setTitle("Detalles del Paciente");
+                stage.setTitle("Detalles de la Orden");
                 stage.setScene(new Scene(root));
                 stage.show();
-
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                // Manejo de errores si no se puede obtener el paciente
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error al cargar los detalles");
-                alert.setContentText("Ocurrió un error al intentar cargar los detalles del paciente: " + e.getMessage());
+                alert.setHeaderText("Error al cargar la vista de detalle");
+                alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
         } else {
-            // Mostrar alerta si no se ha seleccionado un paciente
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un paciente para ver los detalles.");
+            alert.setContentText("Por favor, selecciona una orden para ver los detalles.");
             alert.showAndWait();
         }
     }
+
     
     @FXML
     private void handleOrderGeneration() {

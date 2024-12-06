@@ -61,9 +61,6 @@ public class PrimaryController {
             // Mostrar la nueva ventana
             newStage.show();
 
-            // Cerrar la ventana actual
-            Stage currentStage = (Stage) consultaButton.getScene().getWindow();
-            currentStage.close(); // Cierra la ventana primaria
         } catch (IOException e) {
             e.printStackTrace();
             // Manejo de errores si no se puede cargar la vista

@@ -1,11 +1,11 @@
 uml\version\Paciente$PacienteBuilder.class
 uml\version\App.class
 DTO\PacienteDto.class
+uml\version\VistaPaciente.class
 DAO\OrdenDaoFactory.class
 uml\version\Persona.class
 DAO\Dao.class
 DAO\ConexionSql.class
-uml\version\VistaDetallePaciente.class
 DAO\DaoFactory.class
 DAO\OrdenDao.class
 module-info.class
