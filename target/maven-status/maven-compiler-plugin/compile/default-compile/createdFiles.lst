@@ -5,6 +5,7 @@ DAO\OrdenDaoFactory.class
 uml\version\Persona.class
 DAO\Dao.class
 DAO\ConexionSql.class
+uml\version\VistaDetallePaciente.class
 DAO\DaoFactory.class
 DAO\OrdenDao.class
 module-info.class

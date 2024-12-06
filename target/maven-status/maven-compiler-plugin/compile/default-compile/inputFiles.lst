@@ -1,23 +1,24 @@
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\Dao.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\DetalleOrdenController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Persona.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\DaoFactory.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\RegistroPacienteController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DTO\PacienteDto.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DTO\PersonaDto.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\ConexionSql.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\OrdenDaoFactory.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\PacienteDaoFactory.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\ConsultaPrincipalController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\GenerarOrdenController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\PacienteDao.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Orden.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\module-info.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\ConsultaPacientesController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\VistaOrdenPaciente.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DTO\OrdenDto.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\Paciente.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\DetallePacienteController.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\DAO\OrdenDao.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\App.java
-C:\Users\agusm\OneDrive\Documentos\Ing. Informatica\4° Año (2024)\DOO\FinalDOO\DOO\src\main\java\uml\version\PrimaryController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DTO\OrdenDto.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\Paciente.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\VistaOrdenPaciente.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\GenerarOrdenController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\Orden.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\PrimaryController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\App.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\VistaDetallePaciente.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\OrdenDao.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\DaoFactory.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\DetallePacienteController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\RegistroPacienteController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DTO\PersonaDto.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\DetalleOrdenController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\Persona.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\ConsultaPrincipalController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\ConexionSql.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\PacienteDao.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\PacienteDaoFactory.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\uml\version\ConsultaPacientesController.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\OrdenDaoFactory.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DTO\PacienteDto.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\DAO\Dao.java
+C:\Users\Nico\Documents\Facultad\TrabajoFinalDoo\DOO\src\main\java\module-info.java

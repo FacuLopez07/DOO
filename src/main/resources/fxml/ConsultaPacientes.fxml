@@ -24,7 +24,7 @@
             </HBox>
             <TableView fx:id="tableViewPacientes" prefHeight="400" prefWidth="792.0">
                 <columns>
-                    <TableColumn fx:id="columnOrden" prefWidth="103.0" text="Nro" />
+                    <TableColumn fx:id="nroPaciente" prefWidth="103.0" text="Nro Paciente" />
                <TableColumn fx:id="columnDni" prefWidth="212.0" text="Dni Paciente" />
                     <TableColumn fx:id="columnApellido" prefWidth="230.0" text="Apellido" />
                     <TableColumn fx:id="columnNombre" prefWidth="230.0" text="Nombre" />
