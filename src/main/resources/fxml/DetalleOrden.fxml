@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
@@ -10,34 +13,40 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="391.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.DetalleOrdenController">
+<AnchorPane prefHeight="391.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.DetalleOrdenController">
     <children>
         <StackPane>
-            <VBox alignment="CENTER" prefHeight="410.0" prefWidth="340.0" spacing="10.0" style="-fx-padding: 20;">
-            <HBox layoutX="30.0" layoutY="40.0" prefHeight="23.0" prefWidth="300.0">
-               <children>
-                  <TextField fx:id="nroOrdenField" editable="false" prefHeight="26.0" prefWidth="111.0" promptText="Nro Orden" />
-               </children>
-            </HBox>
-            <HBox prefHeight="23.0" prefWidth="300.0">
-               <children>
-                  <TextField fx:id="turnoField" editable="false" prefHeight="26.0" prefWidth="141.0" promptText="Turno" />
-                  <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
-                  <TextField fx:id="fechaConsultaField" editable="false" prefHeight="26.0" prefWidth="188.0" />
-               </children>
-            </HBox>
-                <TextField fx:id="nombreField" editable="false" prefWidth="300.0" promptText="Nombre" />
-                <TextField fx:id="apellidoField" editable="false" prefWidth="300.0" promptText="Apellido" />
-            <TextField fx:id="nroDniField" editable="false" layoutX="30.0" layoutY="102.0" prefWidth="300.0" promptText="Nro DNI" />
-                <TextField fx:id="servicioField" alignment="TOP_LEFT" editable="false" prefHeight="18.0" prefWidth="300.0" promptText="Servicio" />
-                <TextField fx:id="estadoField" editable="false" prefHeight="26.0" prefWidth="195.0" promptText="Estado" />
-            <TextField fx:id="diagnosticoField" alignment="TOP_LEFT" editable="false" layoutX="30.0" layoutY="220.0" prefHeight="88.0" prefWidth="300.0" promptText="Diagnostico" />
-                
-                   <HBox spacing="10.0">
-                    <Region minWidth="115" />
-                    <Button fx:id="closeButton" onAction="#handleClose" text="Cerrar" />
-                </HBox>
-            </VBox>
+           <children>
+               <VBox alignment="CENTER" prefHeight="410.0" prefWidth="340.0" spacing="10.0" style="-fx-padding: 20;">
+                  <children>
+                  <HBox layoutX="30.0" layoutY="40.0" prefHeight="23.0" prefWidth="300.0">
+                     <children>
+                        <TextField fx:id="nroOrdenField" disable="true" editable="false" prefHeight="26.0" prefWidth="111.0" promptText="Nro Orden" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="23.0" prefWidth="300.0">
+                     <children>
+                        <TextField fx:id="turnoField" disable="true" editable="false" prefHeight="26.0" prefWidth="141.0" promptText="Turno" />
+                        <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
+                        <TextField fx:id="fechaConsultaField" disable="true" editable="false" prefHeight="26.0" prefWidth="188.0" />
+                     </children>
+                  </HBox>
+                      <TextField fx:id="nombreField" disable="true" editable="false" prefWidth="300.0" promptText="Nombre" />
+                      <TextField fx:id="apellidoField" disable="true" editable="false" prefWidth="300.0" promptText="Apellido" />
+                  <TextField fx:id="nroDniField" disable="true" editable="false" layoutX="30.0" layoutY="102.0" prefWidth="300.0" promptText="Nro DNI" />
+                      <TextField fx:id="servicioField" alignment="TOP_LEFT" disable="true" editable="false" prefHeight="18.0" prefWidth="300.0" promptText="Servicio" />
+                      <TextField fx:id="estadoField" disable="true" editable="false" prefHeight="26.0" prefWidth="195.0" promptText="Estado" />
+                  <TextField fx:id="diagnosticoField" alignment="TOP_LEFT" disable="true" editable="false" layoutX="30.0" layoutY="220.0" prefHeight="88.0" prefWidth="300.0" promptText="Diagnostico" />
+                      
+                         <HBox spacing="10.0">
+                         <children>
+                             <Region minWidth="115" />
+                             <Button fx:id="closeButton" onAction="#handleClose" text="Cerrar" />
+                         </children>
+                      </HBox>
+                  </children>
+               </VBox>
+           </children>
         </StackPane>
     </children>
 </AnchorPane>
