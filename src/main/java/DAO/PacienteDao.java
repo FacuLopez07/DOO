@@ -137,6 +137,68 @@ public class PacienteDao implements Dao<PacienteDto> {
 
     @Override
     public List<PacienteDto> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.conexion = new ConexionSql();
+        Connection con;
+        Statement sentencia = null;
+        ResultSet rs = null;
+        List<PacienteDto> lista = new ArrayList<>();
+
+        try {
+            con = this.conexion.getConnection();
+            String sql = "SELECT p.id AS persona_id, p.nombre, p.apellido, p.tipo_dni, p.nro_dni, p.direccion, p.barrio, p.fecha_nacimiento, "
+                       + "pac.nro_paciente, pac.jefe_familia, pac.obra_social, pac.alergias, pac.medicamentos_actuales, "
+                       + "pac.enfermedades_cronicas, pac.contacto_emergencia_nombre, pac.contacto_emergencia_telefono, "
+                       + "pac.contacto_emergencia_relacion, pac.historial_cirugias, pac.historial_hospitalizaciones "
+                       + "FROM pacientes pac "
+                       + "INNER JOIN personas p ON pac.persona_id = p.id"; // Unimos las tablas por la clave foránea
+
+            sentencia = con.createStatement();
+            rs = sentencia.executeQuery(sql);
+
+            while (rs.next()) {
+                // Crear el objeto PacienteDto usando el Builder
+                PacienteDto.PacienteBuilder builder = new PacienteDto.PacienteBuilder(
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("tipo_dni"),
+                    rs.getString("nro_dni"),
+                    rs.getString("direccion"),
+                    rs.getString("barrio"),
+                    rs.getString("fecha_nacimiento"),
+                    rs.getInt("nro_paciente")
+                );
+
+                // Configurar los valores opcionales
+                builder.setJefeFamilia(rs.getBoolean("jefe_familia"))
+                       .setObraSocial(rs.getString("obra_social"))
+                       .setAlergias(rs.getString("alergias"))
+                       .setMedicamentosActuales(rs.getString("medicamentos_actuales"))
+                       .setEnfermedadesCronicas(rs.getString("enfermedades_cronicas"))
+                       .setContactoEmergenciaNombre(rs.getString("contacto_emergencia_nombre"))
+                       .setContactoEmergenciaTelefono(rs.getString("contacto_emergencia_telefono"))
+                       .setContactoEmergenciaRelacion(rs.getString("contacto_emergencia_relacion"))
+                       .setHistorialCirugias(rs.getString("historial_cirugias"))
+                       .setHistorialHospitalizaciones(rs.getString("historial_hospitalizaciones"));
+
+                // Construir el objeto PacienteDto
+                PacienteDto pacientedto = builder.build();
+                lista.add(pacientedto);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar pacientes: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (sentencia != null) sentencia.close();
+                this.conexion.cerrar();
+            } catch (Exception ex) {
+                System.err.println("Error al cerrar recursos: " + ex.getMessage());
+            }
+        }
+
+        return lista;
     }
+
+
 }

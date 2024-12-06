@@ -17,10 +17,10 @@ public class OrdenDto {
     private String diagnostico;
     private String fecha_consulta;
     private String estado;
-    private Paciente paciente;
+    private Integer paciente;
     
     // Constructor completo
-    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico, String fechaConsulta, String estado, int pacienteId) {
+    public OrdenDto(int nro_orden, String servicio, String turno, String diagnostico, String fechaConsulta, String estado, int paciente) {
         this.nro_orden = nro_orden;
         this.servicio = servicio;
         this.turno = turno;
@@ -56,7 +56,7 @@ public class OrdenDto {
         return estado;
     }
 
-    public Paciente getPaciente() {
+    public Integer getPaciente() {
         return paciente;
     }
 
@@ -86,7 +86,7 @@ public class OrdenDto {
         this.estado = estado;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void setPaciente(Integer paciente) {
         this.paciente = paciente;
     }
 

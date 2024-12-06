@@ -21,6 +21,8 @@ import java.util.List;
 import DTO.OrdenDto;
 import DAO.Dao;
 import DAO.DaoFactory;
+import DTO.PacienteDto;
+import java.util.ArrayList;
 import uml.version.Paciente;
 
 public class ConsultaPrincipalController implements Initializable {
@@ -34,57 +36,75 @@ public class ConsultaPrincipalController implements Initializable {
     @FXML
     private Button registerButton;
     @FXML
-    private TableView<Orden> tableViewPacientes;
+    private TableView<Object> tableViewPacientes;
     @FXML
-    private TableColumn<Orden, Integer> columnOrden;
+    private TableColumn<Object, Integer> columnOrden;
     @FXML
-    private TableColumn<Orden, String> columnServicio;
+    private TableColumn<Object, String> columnServicio;
+ 
     @FXML
-    private TableColumn<Orden, String> columnTurno;
+    private TableColumn<Object, String> columnFechaConsulta;
     @FXML
-    private TableColumn<Orden, String> columnDiagnostico;
-    @FXML
-    private TableColumn<Orden, String> columnFechaConsulta;
-    @FXML
-    private TableColumn<Orden, String> columnEstado;
+    private TableColumn<Object, String> columnDni;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Inicializa las columnas de la tabla
         columnOrden.setCellValueFactory(new PropertyValueFactory<>("NroOrden"));
         columnServicio.setCellValueFactory(new PropertyValueFactory<>("Servicio"));
-        columnTurno.setCellValueFactory(new PropertyValueFactory<>("Turno"));
-        columnDiagnostico.setCellValueFactory(new PropertyValueFactory<>("Diagnostico"));
         columnFechaConsulta.setCellValueFactory(new PropertyValueFactory<>("FechaConsulta"));
-        columnEstado.setCellValueFactory(new PropertyValueFactory<>("Estado"));
+        columnDni.setCellValueFactory(new PropertyValueFactory<>("DniPaciente"));
 
         // Cargar los datos de pacientes
-        cargarPacientes();
+        cargarOrdenes();
     }
 
-    private void cargarPacientes() {
-        // Usar el Factory para obtener el DAO
+    private void cargarOrdenes() {
         Dao<OrdenDto> ordenDao = DaoFactory.getDao(OrdenDto.class);
+        Dao<PacienteDto> pacienteDao = DaoFactory.getPacienteDao(PacienteDto.class);
 
-        // Llamar al método de listado desde el DAO
         List<OrdenDto> ordenes = ordenDao.listarTodos();
+        List<PacienteDto> pacientes = pacienteDao.listarTodos();
 
-        // Convertir Dto a modelo (si es necesario) y cargar en la tabla
-        tableViewPacientes.getItems().clear();
-        for (OrdenDto dto : ordenes) {
-            tableViewPacientes.getItems().add(
-                new Orden(
-                            dto.getNroOrden(),          // nro_orden
-                            dto.getServicio(),          // servicio
-                            dto.getTurno(),             // turno
-                            dto.getDiagnostico(),       // diagnostico
-                            dto.getFechaConsulta(),     // fecha_consulta
-                            dto.getEstado(),            // estado
-                            dto.getPaciente()           // paciente
-                        )
-            );
+        List<VistaOrdenPaciente> vistaDatos = new ArrayList<>();
+
+        for (OrdenDto orden : ordenes) {
+            if (orden.getPaciente() != null) {
+                // Imprimir información de depuración
+                System.out.println("Orden: " + orden.getNroOrden() + 
+                    ", Paciente asociado: " + orden.getPaciente());
+
+                PacienteDto paciente = pacientes.stream()
+                    .filter(p -> p.getNroPaciente() == orden.getPaciente())
+                    .findFirst()
+                    .orElse(null);
+
+                if (paciente != null) {
+                    vistaDatos.add(new VistaOrdenPaciente(
+                        orden.getNroOrden(),
+                        paciente.getNroDni(),
+                        orden.getServicio(),
+                        orden.getFechaConsulta()
+                    ));
+                } else {
+                    System.out.println("Paciente no encontrado para la orden: " + orden.getNroOrden());
+                }
+            } else {
+                System.out.println("Orden sin paciente: " + orden.getNroOrden());
+                vistaDatos.add(new VistaOrdenPaciente(
+                    orden.getNroOrden(),
+                    "Sin DNI", // Valor predeterminado
+                    orden.getServicio(),
+                    orden.getFechaConsulta()
+                ));
+            }
         }
+
+        tableViewPacientes.getItems().clear();
+        tableViewPacientes.getItems().addAll(vistaDatos);
     }
+
+
 
     
     @FXML
@@ -120,59 +140,25 @@ public class ConsultaPrincipalController implements Initializable {
         }
     }
     
+   
     @FXML
     private void handleViewDetails() {
-        // Obtener el paciente seleccionado en la tabla
-        Orden selectedPaciente = tableViewPacientes.getSelectionModel().getSelectedItem();
-        if (selectedPaciente != null) {
-            try {
-                // Usar el Factory para obtener el DAO
-                Dao<OrdenDto> ordenDao = DaoFactory.getDao(OrdenDto.class);
+        // Obtener el elemento seleccionado en la tabla
+        Object selectedItem = tableViewPacientes.getSelectionModel().getSelectedItem();
 
-                // Obtener los detalles del paciente desde el DAO
-                OrdenDto ordenDto = ordenDao.obtenerPorOrden(selectedPaciente.getNroOrden());
-
-                // Convertir el DTO en un modelo Paciente
-                Orden orden = new Orden(
-                    ordenDto.getNroOrden(),
-                    ordenDto.getServicio(),
-                    ordenDto.getTurno(),
-                    ordenDto.getDiagnostico(),
-                    ordenDto.getFechaConsulta(),
-                    ordenDto.getEstado(),
-                    ordenDto.getPaciente()
-                );
-
-                // Cargar la vista de DetallePaciente
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetallePaciente.fxml"));
-                Parent root = loader.load();
-
-                // Obtener el controlador de la vista de detalle
-                DetallePacienteController detalleController = loader.getController();
-                detalleController.cargarDatosPaciente(orden); // Pasar el modelo al controlador
-
-                // Crear y mostrar la nueva ventana
-                Stage stage = new Stage();
-                stage.setTitle("Detalles del Paciente");
-                stage.setScene(new Scene(root));
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                // Manejo de errores si no se puede obtener el paciente
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al cargar los detalles");
-                alert.setContentText("Ocurrió un error al intentar cargar los detalles del paciente: " + e.getMessage());
-                alert.showAndWait();
-            }
+        if (selectedItem != null) {
+            // Mostrar un mensaje básico indicando que se seleccionó un elemento
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Elemento seleccionado");
+            alert.setHeaderText("Detalles del elemento");
+            alert.setContentText("Se seleccionó un elemento en la tabla.");
+            alert.showAndWait();
         } else {
-            // Mostrar alerta si no se ha seleccionado un paciente
+            // Mostrar una advertencia si no se selecciona nada
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
-            alert.setContentText("Por favor, seleccione un paciente para ver los detalles.");
+            alert.setContentText("Por favor, seleccione un elemento para ver los detalles.");
             alert.showAndWait();
         }
     }

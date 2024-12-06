@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.ConsultaPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.ConsultaPrincipalController">
     <children>
-        <VBox prefHeight="436.0" prefWidth="747.0" spacing="10.0">
+        <VBox prefHeight="436.0" prefWidth="591.0" spacing="10.0">
             <HBox spacing="10.0">
                 <TextField fx:id="searchField" promptText="Buscar..." />
                 <Button fx:id="searchButton" onAction="#handleSearch" text="Buscar" />
@@ -23,11 +23,9 @@
             <TableView fx:id="tableViewPacientes" prefHeight="400" prefWidth="792.0">
                 <columns>
                     <TableColumn fx:id="columnOrden" prefWidth="50" text="Nro" />
-                    <TableColumn fx:id="columnServicio" prefWidth="115.0" text="Servicio" />
-                    <TableColumn fx:id="columnTurno" prefWidth="123.199951171875" text="Turno" />
-                    <TableColumn fx:id="columnDiagnostico" prefWidth="205.5999755859375" text="Diagnostico" />
-                    <TableColumn fx:id="columnFechaConsulta" prefWidth="129.60006713867188" text="Fecha Consulta" />
-               <TableColumn fx:id="columnEstado" prefWidth="125.5999755859375" text="Estado" />
+               <TableColumn fx:id="columnDni" prefWidth="142.4000244140625" text="Dni Paciente" />
+                    <TableColumn fx:id="columnServicio" prefWidth="193.5999755859375" text="Servicio" />
+                    <TableColumn fx:id="columnFechaConsulta" prefWidth="203.9999877929688" text="Fecha Consulta" />
                 </columns>
             </TableView>
         </VBox>

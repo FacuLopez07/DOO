@@ -18,5 +18,6 @@ uml\version\Orden.class
 uml\version\DetalleOrdenController.class
 DTO\PersonaDto.class
 uml\version\Paciente.class
+uml\version\VistaOrdenPaciente.class
 uml\version\RegistroPacienteController.class
 DAO\PacienteDaoFactory.class
