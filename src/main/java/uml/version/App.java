@@ -33,6 +33,7 @@ public class App extends Application {
         pacienteDao = factoryPaciente.createPacienteDao();
         
         scene = new Scene(loadFXML("primary"), 640, 480);
+        stage.setTitle("Gestión de la Clínica");
         stage.setScene(scene);
         stage.show();
     }

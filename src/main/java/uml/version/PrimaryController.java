@@ -20,21 +20,6 @@ public class PrimaryController {
     private Button primaryButton;
     @FXML
     private Button consultaButton;
-    
-    @FXML
-    public void initialize() {
-        verificarConexion();
-    }
-
-    private void verificarConexion() {
-        ConexionSql conexionSql = new ConexionSql();
-        if (conexionSql.getConnection() != null) {
-            connectionStatusLabel.setText("Conexión exitosa a la base de datos");
-        } else {
-            connectionStatusLabel.setText("Error al conectar con la base de datos");
-        }
-        conexionSql.cerrar(); // Asegúrate de cerrar la conexión después de verificar
-    }
 
     @FXML
     private void openConsultaPrincipal() {
@@ -48,6 +33,58 @@ public class PrimaryController {
             // Crear una nueva ventana
             Stage newStage = new Stage();
             newStage.setTitle("Consulta Principal");
+            newStage.setScene(scene);
+
+            // Mostrar la nueva ventana
+            newStage.show();
+
+            // Cerrar la ventana actual
+            Stage currentStage = (Stage) consultaButton.getScene().getWindow();
+            currentStage.close(); // Cierra la ventana primaria
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores si no se puede cargar la vista
+        }
+    }
+    
+    @FXML
+    private void openConsultaPacientes() {
+        try {
+            // Cargar el archivo FXML de ConsultaPrincipal
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConsultaPacientes.fxml"));
+
+            // Crear una nueva escena con el contenido cargado
+            Scene scene = new Scene(root);
+
+            // Crear una nueva ventana
+            Stage newStage = new Stage();
+            newStage.setTitle("Consulta Pacientes");
+            newStage.setScene(scene);
+
+            // Mostrar la nueva ventana
+            newStage.show();
+
+            // Cerrar la ventana actual
+            Stage currentStage = (Stage) consultaButton.getScene().getWindow();
+            currentStage.close(); // Cierra la ventana primaria
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores si no se puede cargar la vista
+        }
+    }
+    
+    @FXML
+    private void openRegistrarPacientes() {
+        try {
+            // Cargar el archivo FXML de ConsultaPrincipal
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/RegistroNuevoPaciente.fxml"));
+
+            // Crear una nueva escena con el contenido cargado
+            Scene scene = new Scene(root);
+
+            // Crear una nueva ventana
+            Stage newStage = new Stage();
+            newStage.setTitle("Registro Nuevo Paciente");
             newStage.setScene(scene);
 
             // Mostrar la nueva ventana

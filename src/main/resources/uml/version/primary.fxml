@@ -18,9 +18,9 @@
          <children>
             <Button fx:id="consultaOrdenButton" onAction="#openConsultaPrincipal" text="Consultar Ordenes" />
             <Separator prefHeight="0.0" prefWidth="25.0" visible="false" />
-            <Button fx:id="consultaPacienteButton" mnemonicParsing="false" text="Consultar Paciente" />
+            <Button fx:id="consultaPacienteButton" onAction="#openConsultaPacientes" text="Consultar Paciente" />
             <Separator layoutX="176.0" layoutY="22.0" prefHeight="0.0" prefWidth="25.0" visible="false" />
-            <Button fx:id="registrarPacienteButton" mnemonicParsing="false" text="Registrar Paciente" />
+            <Button fx:id="registrarPacienteButton" onAction="#openRegistrarPacientes" text="Registrar Paciente" />
          </children>
       </HBox>
    </children>
