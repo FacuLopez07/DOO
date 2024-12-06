@@ -156,27 +156,39 @@ public class ConsultaPacientesController implements Initializable {
     
     @FXML
     private void handleOrderGeneration() {
-        try {
-            // Cargar el archivo FXML de ConsultaPrincipal
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/GenerarOrden.fxml"));
+        VistaPaciente selectedPaciente = (VistaPaciente) tableViewPacientes.getSelectionModel().getSelectedItem();
 
-            // Crear una nueva escena con el contenido cargado
-            Scene scene = new Scene(root);
+        if (selectedPaciente != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GenerarOrden.fxml"));
+                Parent root = loader.load();
 
-            // Crear una nueva ventana
-            Stage newStage = new Stage();
-            newStage.setTitle("Nueva Orden");
-            newStage.setScene(scene);
+                GenerarOrdenController ordenController = loader.getController();
 
-            // Mostrar la nueva ventana
-            newStage.show();
+                // Pasa la información del paciente seleccionado al controlador de la vista de generación de órdenes
+                ordenController.cargarDatosPaciente(selectedPaciente);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Manejo de errores si no se puede cargar la vista
+                Stage stage = new Stage();
+                stage.setTitle("Generar Orden");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al cargar la vista de generación de órdenes");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecciona un paciente para generar una orden.");
+            alert.showAndWait();
         }
     }
-    
+
     @FXML
     private void handleRegister() {
         try {
