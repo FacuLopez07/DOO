@@ -26,10 +26,72 @@ public class PacienteDao implements Dao<PacienteDto> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public List<PacienteDto> listarPorCriterio(PacienteDto dto) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<PacienteDto> buscarPorDni(String dni) {
+        this.conexion = new ConexionSql();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<PacienteDto> lista = new ArrayList<>();
+
+        try {
+            con = this.conexion.getConnection();
+            String sql = "SELECT p.id AS persona_id, p.nombre, p.apellido, p.tipo_dni, p.nro_dni, p.direccion, p.barrio, p.fecha_nacimiento, "
+                       + "pac.nro_paciente, pac.jefe_familia, pac.obra_social, pac.alergias, pac.medicamentos_actuales, "
+                       + "pac.enfermedades_cronicas, pac.contacto_emergencia_nombre, pac.contacto_emergencia_telefono, "
+                       + "pac.contacto_emergencia_relacion, pac.historial_cirugias, pac.historial_hospitalizaciones "
+                       + "FROM pacientes pac "
+                       + "INNER JOIN personas p ON pac.persona_id = p.id "
+                       + "WHERE p.nro_dni = ?"; // Filtro por DNI
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, dni);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // Crear el objeto PacienteDto usando el Builder
+                PacienteDto.PacienteBuilder builder = new PacienteDto.PacienteBuilder(
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("tipo_dni"),
+                    rs.getString("nro_dni"),
+                    rs.getString("direccion"),
+                    rs.getString("barrio"),
+                    rs.getString("fecha_nacimiento"),
+                    rs.getInt("nro_paciente")
+                );
+
+                // Configurar los valores opcionales
+                builder.setJefeFamilia(rs.getBoolean("jefe_familia"))
+                       .setObraSocial(rs.getString("obra_social"))
+                       .setAlergias(rs.getString("alergias"))
+                       .setMedicamentosActuales(rs.getString("medicamentos_actuales"))
+                       .setEnfermedadesCronicas(rs.getString("enfermedades_cronicas"))
+                       .setContactoEmergenciaNombre(rs.getString("contacto_emergencia_nombre"))
+                       .setContactoEmergenciaTelefono(rs.getString("contacto_emergencia_telefono"))
+                       .setContactoEmergenciaRelacion(rs.getString("contacto_emergencia_relacion"))
+                       .setHistorialCirugias(rs.getString("historial_cirugias"))
+                       .setHistorialHospitalizaciones(rs.getString("historial_hospitalizaciones"));
+
+                // Construir el objeto PacienteDto
+                PacienteDto pacientedto = builder.build();
+                lista.add(pacientedto);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al buscar pacientes por DNI: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                this.conexion.cerrar();
+            } catch (Exception ex) {
+                System.err.println("Error al cerrar recursos: " + ex.getMessage());
+            }
+        }
+
+        return lista;
     }
+
 
     @Override
     public boolean insertar(PacienteDto dto) {
@@ -198,6 +260,11 @@ public class PacienteDao implements Dao<PacienteDto> {
         }
 
         return lista;
+    }
+
+    @Override
+    public List<PacienteDto> listarPorCriterio(PacienteDto dto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 

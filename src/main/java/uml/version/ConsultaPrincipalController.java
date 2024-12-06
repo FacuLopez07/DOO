@@ -121,11 +121,65 @@ public class ConsultaPrincipalController implements Initializable {
     
     @FXML
     private void handleSearch() {
-        String searchTerm = searchField.getText();
-        // Aquí implementa la lógica para filtrar los datos en tableViewPacientes
-        System.out.println("Buscando: " + searchTerm);
-        // Puedes aplicar un filtro a tu ObservableList que respete el término de búsqueda
+        String searchTerm = searchField.getText().trim();
+
+        if (searchTerm.isEmpty()) {
+            // Si el campo está vacío, cargar todas las órdenes
+            cargarOrdenes();
+            return;
+        }
+
+        // Obtener el DAO de órdenes y pacientes
+        Dao<OrdenDto> ordenDao = DaoFactory.getDao(OrdenDto.class);
+        Dao<PacienteDto> pacienteDao = DaoFactory.getPacienteDao(PacienteDto.class);
+
+        // Listar todos los datos para aplicar el filtro
+        List<OrdenDto> ordenes = ordenDao.listarTodos();
+        List<PacienteDto> pacientes = pacienteDao.listarTodos();
+
+        // Crear una lista filtrada
+        List<VistaOrdenPaciente> vistaDatosFiltrados = new ArrayList<>();
+
+        for (OrdenDto orden : ordenes) {
+            if (orden.getPaciente() != null) {
+                PacienteDto paciente = null;
+                for (PacienteDto p : pacientes) {
+                    if (p.getNroPaciente() == orden.getPaciente()) {
+                        paciente = p;
+                        break;
+                    }
+                }
+
+                if (paciente != null && paciente.getNroDni().contains(searchTerm)) {
+                    // Agregar coincidencias basadas en el DNI
+                    vistaDatosFiltrados.add(new VistaOrdenPaciente(
+                        orden.getNroOrden(),
+                        paciente.getNroDni(),
+                        orden.getServicio(),
+                        orden.getFechaConsulta(),
+                        paciente.getNombre(),
+                        paciente.getApellido(),
+                        orden.getTurno(),
+                        orden.getEstado(),
+                        orden.getDiagnostico()
+                    ));
+                }
+            }
+        }
+
+        // Actualizar el TableView con los datos filtrados
+        tableViewPacientes.getItems().clear();
+        tableViewPacientes.getItems().addAll(vistaDatosFiltrados);
+
+        if (vistaDatosFiltrados.isEmpty()) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Sin resultados");
+            alert.setHeaderText(null);
+            alert.setContentText("No se encontraron órdenes con el DNI ingresado.");
+            alert.showAndWait();
+        }
     }
+
     
     @FXML
     private void handleRegister() {

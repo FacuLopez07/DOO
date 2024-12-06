@@ -6,6 +6,7 @@ package uml.version;
 
 import DAO.Dao;
 import DAO.DaoFactory;
+import DAO.PacienteDao;
 import DTO.PacienteDto;
 import java.io.IOException;
 import java.net.URL;
@@ -115,8 +116,68 @@ public class ConsultaPacientesController implements Initializable {
     
     @FXML
     private void handleSearch() {
-        
+        // Obtener el valor del campo de búsqueda
+        String dniBusqueda = searchField.getText().trim();
+
+        try {
+            if (dniBusqueda.isEmpty()) {
+                // Si el campo está vacío, cargar todos los pacientes
+                cargarPaciente();
+            } else {
+                // Obtener el DAO para pacientes
+                PacienteDao pacienteDao = new PacienteDao();
+
+                // Buscar el paciente por DNI
+                List<PacienteDto> resultados = pacienteDao.buscarPorDni(dniBusqueda);
+
+                // Verificar si se encontraron resultados
+                if (resultados.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Sin resultados");
+                    alert.setHeaderText(null);
+                    alert.setContentText("No se encontraron pacientes con el DNI ingresado.");
+                    alert.showAndWait();
+                } else {
+                    // Convertir los resultados a objetos VistaPaciente
+                    List<VistaPaciente> vistaPacientes = new ArrayList<>();
+                    for (PacienteDto paciente : resultados) {
+                        vistaPacientes.add(new VistaPaciente(
+                            paciente.getNroPaciente(),
+                            paciente.getTipoDni(),
+                            paciente.getNroDni(),
+                            paciente.getNombre(),
+                            paciente.getApellido(),
+                            paciente.getDireccion(),
+                            paciente.getBarrio(),
+                            paciente.isJefeFamilia(),
+                            paciente.getFechaNacimiento(),
+                            paciente.getObraSocial(),
+                            paciente.getAlergias() != null ? paciente.getAlergias() : "Sin información",
+                            paciente.getMedicamentosActuales() != null ? paciente.getMedicamentosActuales() : "Sin información",
+                            paciente.getEnfermedadesCronicas() != null ? paciente.getEnfermedadesCronicas() : "Sin información",
+                            paciente.getContactoEmergenciaNombre() != null ? paciente.getContactoEmergenciaNombre() : "Sin información",
+                            paciente.getContactoEmergenciaTelefono() != null ? paciente.getContactoEmergenciaTelefono() : "Sin información",
+                            paciente.getContactoEmergenciaRelacion() != null ? paciente.getContactoEmergenciaRelacion() : "Sin información",
+                            paciente.getHistorialCirugias() != null ? paciente.getHistorialCirugias() : "Sin información",
+                            paciente.getHistorialHospitalizaciones() != null ? paciente.getHistorialHospitalizaciones() : "Sin información"
+                        ));
+                    }
+
+                    // Actualizar el TableView con los resultados de la búsqueda
+                    tableViewPacientes.getItems().clear();
+                    tableViewPacientes.getItems().addAll(vistaPacientes);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error en la búsqueda");
+            alert.setHeaderText("Ocurrió un error al buscar los datos.");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
+
     
     @FXML
     private void handleViewDetails() {
