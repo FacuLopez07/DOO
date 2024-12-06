@@ -4,6 +4,8 @@
  */
 package uml.version;
 
+import java.util.Date;
+
 /**
  *
  * @author facundito
@@ -13,11 +15,11 @@ public class Orden {
     private String servicio;
     private String turno;
     private String diagnostico;
-    private String fecha_consulta;
+    private Date fecha_consulta;
     private String estado;
     private Paciente paciente;
 
-    public Orden(int nro_orden, String servicio, String turno, String diagnostico, String fecha_consulta, String estado, Paciente paciente) {
+    public Orden(int nro_orden, String servicio, String turno, String diagnostico, Date fecha_consulta, String estado, Paciente paciente) {
         this.nro_orden = nro_orden;
         this.servicio = servicio;
         this.turno = turno;
@@ -44,7 +46,7 @@ public class Orden {
         return diagnostico;
     }
 
-    public String getFechaConsulta() {
+    public Date getFechaConsulta() {
         return fecha_consulta;
     }
 

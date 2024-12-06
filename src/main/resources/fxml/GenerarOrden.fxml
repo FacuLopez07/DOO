@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="391.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uml.version.DetalleOrdenController">
+    <children>
+        <StackPane>
+            <VBox alignment="CENTER" prefHeight="410.0" prefWidth="340.0" spacing="10.0" style="-fx-padding: 20;">
+            <HBox layoutX="30.0" layoutY="40.0" prefHeight="23.0" prefWidth="300.0">
+               <children>
+                  <TextField fx:id="nroOrdenField" prefHeight="26.0" prefWidth="111.0" promptText="Nro Orden" />
+               </children>
+            </HBox>
+            <HBox prefHeight="23.0" prefWidth="300.0">
+               <children>
+                  <TextField fx:id="turnoField" prefHeight="26.0" prefWidth="141.0" promptText="Turno" />
+                  <Separator prefHeight="6.0" prefWidth="57.0" visible="false" />
+                  <DatePicker fx:id="fechaTurnoField" prefHeight="26.0" prefWidth="188.0" />
+               </children>
+            </HBox>
+                <TextField fx:id="nombreField" prefWidth="300.0" promptText="Nombre" />
+                <TextField fx:id="apellidoField" prefWidth="300.0" promptText="Apellido" />
+            <TextField fx:id="nroDniField" layoutX="30.0" layoutY="102.0" prefWidth="300.0" promptText="Nro DNI" />
+                <TextField fx:id="servicioField" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="300.0" promptText="Servicio" />
+                <TextField fx:id="estadoField" prefHeight="26.0" prefWidth="195.0" promptText="Estado" />
+            <TextField fx:id="diagnosticoField" alignment="TOP_LEFT" layoutX="30.0" layoutY="220.0" prefHeight="88.0" prefWidth="300.0" promptText="Diagnostico" />
+                
+                   <HBox alignment="CENTER" spacing="10.0">
+               <Button fx:id="saveButton" mnemonicParsing="false" text="Guardar" />
+               <Separator prefHeight="21.0" prefWidth="136.0" visible="false" />
+                    <Button fx:id="cancelButton" onAction="#handleClose" text="Cancelar" />
+                </HBox>
+            </VBox>
+        </StackPane>
+    </children>
+</AnchorPane>

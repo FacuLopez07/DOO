@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -38,10 +41,24 @@ public class DetalleOrdenController {
 
     // Método para cargar los datos del paciente en los campos de texto
     public void cargarDatosPaciente(Orden orden) {
+        nroOrdenField.setText(String.valueOf(orden.getNroOrden()));
+        turnoField.setText(orden.getTurno());
+        
+        // Procesamiento de la fecha
+        if (orden.getFechaConsulta() != null) {
+        LocalDate localDate = orden.getFechaConsulta()
+                                   .toInstant()
+                                   .atZone(ZoneId.systemDefault())
+                                   .toLocalDate();
+        fechaTurnoField.setValue(localDate); // Asignar al DatePicker
+        }
+        
         nombreField.setText(orden.getNombre());
         apellidoField.setText(orden.getApellido());
         dniField.setText(orden.getDni());
+        servicioField.setText(orden.getServicio());
         estadoField.setText(orden.getEstado());
+        diagnosticoField.setText(orden.getDiagnostico());
     }
     
     @FXML
